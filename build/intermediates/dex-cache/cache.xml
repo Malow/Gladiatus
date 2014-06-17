@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pre-dex-items>
+
+    <item
+        dex="D:\MaloW Creation\Projects\Gladiatus\gladiatus\build\intermediates\pre-dexed\debug\jackson-databind-2.4.0-afa9df9cd00d13317ae9dfd75f24ddf123f1591e.jar"
+        jar="C:\Users\MaloW\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-databind\2.4.0\473e063d6396a1ff6e4b9c7943e604291ce18b07\jackson-databind-2.4.0.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="473e063d6396a1ff6e4b9c7943e604291ce18b07"/>
+    <item
+        dex="D:\MaloW Creation\Projects\Gladiatus\gladiatus\build\intermediates\pre-dexed\debug\jackson-annotations-2.4.0-825d21ad2c512a0b3c7454f482b55394b7848a23.jar"
+        jar="C:\Users\MaloW\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-annotations\2.4.0\d6a66c7a5f01cf500377bd669507a08cfeba882a\jackson-annotations-2.4.0.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="d6a66c7a5f01cf500377bd669507a08cfeba882a"/>
+    <item
+        dex="D:\MaloW Creation\Projects\Gladiatus\gladiatus\build\intermediates\pre-dexed\debug\support-v4-19.0.0-a667903902b5ec091b9342fcd532bde96f108832.jar"
+        jar="C:\Program Files (x86)\Android Studio\sdk\extras\android\m2repository\com\android\support\support-v4\19.0.0\support-v4-19.0.0.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="afee690af14bd2c32d400cdf78e746fd45c386fa"/>
+    <item
+        dex="D:\MaloW Creation\Projects\Gladiatus\gladiatus\build\intermediates\pre-dexed\debug\jackson-core-2.4.0-939af8d362d8355fb9418d4cdf757bc3732f5127.jar"
+        jar="C:\Users\MaloW\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-core\2.4.0\1e33fd4cca6c4a9bf3d2f638cabb504a5b5c989d\jackson-core-2.4.0.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="1e33fd4cca6c4a9bf3d2f638cabb504a5b5c989d"/>
+
+</pre-dex-items>

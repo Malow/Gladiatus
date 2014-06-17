@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="MaloWLib">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Json">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Json\internal">
+      <UniqueIdentifier>{4cbac002-65ee-4404-b1e3-e571b972eb77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Models">
+      <UniqueIdentifier>{16dbeda7-8c4a-40ec-aa09-dad616eec35b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Models\Requests">
+      <UniqueIdentifier>{91e40f2d-446e-48e0-b0cb-903552c52980}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Models\Responses">
+      <UniqueIdentifier>{057d0f14-0ec8-43c0-aac1-0f05004752ac}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GladiatusServer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MaloWLib\ClientChannel.cpp">
+      <Filter>MaloWLib</Filter>
+    </ClCompile>
+    <ClCompile Include="MaloWLib\NetworkServer.cpp">
+      <Filter>MaloWLib</Filter>
+    </ClCompile>
+    <ClCompile Include="MaloWLib\Process.cpp">
+      <Filter>MaloWLib</Filter>
+    </ClCompile>
+    <ClCompile Include="MaloWLib\ServerChannel.cpp">
+      <Filter>MaloWLib</Filter>
+    </ClCompile>
+    <ClCompile Include="Server.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MaloWLib\Array.h">
+      <Filter>MaloWLib</Filter>
+    </ClInclude>
+    <ClInclude Include="MaloWLib\ClientChannel.h">
+      <Filter>MaloWLib</Filter>
+    </ClInclude>
+    <ClInclude Include="MaloWLib\List.h">
+      <Filter>MaloWLib</Filter>
+    </ClInclude>
+    <ClInclude Include="MaloWLib\MaloW.h">
+      <Filter>MaloWLib</Filter>
+    </ClInclude>
+    <ClInclude Include="MaloWLib\MaloWFileDebug.h">
+      <Filter>MaloWLib</Filter>
+    </ClInclude>
+    <ClInclude Include="MaloWLib\Matrix.h">
+      <Filter>MaloWLib</Filter>
+    </ClInclude>
+    <ClInclude Include="MaloWLib\NetworkPacket.h">
+      <Filter>MaloWLib</Filter>
+    </ClInclude>
+    <ClInclude Include="MaloWLib\NetworkServer.h">
+      <Filter>MaloWLib</Filter>
+    </ClInclude>
+    <ClInclude Include="MaloWLib\Process.h">
+      <Filter>MaloWLib</Filter>
+    </ClInclude>
+    <ClInclude Include="MaloWLib\Queue.h">
+      <Filter>MaloWLib</Filter>
+    </ClInclude>
+    <ClInclude Include="MaloWLib\ServerChannel.h">
+      <Filter>MaloWLib</Filter>
+    </ClInclude>
+    <ClInclude Include="MaloWLib\Vector.h">
+      <Filter>MaloWLib</Filter>
+    </ClInclude>
+    <ClInclude Include="MaloWLib\WindowsWrapper.h">
+      <Filter>MaloWLib</Filter>
+    </ClInclude>
+    <ClInclude Include="Server.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ConnectionListener.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Json\rapidjson\allocators.h">
+      <Filter>Json</Filter>
+    </ClInclude>
+    <ClInclude Include="Json\rapidjson\document.h">
+      <Filter>Json</Filter>
+    </ClInclude>
+    <ClInclude Include="Json\rapidjson\encodedstream.h">
+      <Filter>Json</Filter>
+    </ClInclude>
+    <ClInclude Include="Json\rapidjson\encodings.h">
+      <Filter>Json</Filter>
+    </ClInclude>
+    <ClInclude Include="Json\rapidjson\filereadstream.h">
+      <Filter>Json</Filter>
+    </ClInclude>
+    <ClInclude Include="Json\rapidjson\filestream.h">
+      <Filter>Json</Filter>
+    </ClInclude>
+    <ClInclude Include="Json\rapidjson\filewritestream.h">
+      <Filter>Json</Filter>
+    </ClInclude>
+    <ClInclude Include="Json\rapidjson\prettywriter.h">
+      <Filter>Json</Filter>
+    </ClInclude>
+    <ClInclude Include="Json\rapidjson\rapidjson.h">
+      <Filter>Json</Filter>
+    </ClInclude>
+    <ClInclude Include="Json\rapidjson\reader.h">
+      <Filter>Json</Filter>
+    </ClInclude>
+    <ClInclude Include="Json\rapidjson\stringbuffer.h">
+      <Filter>Json</Filter>
+    </ClInclude>
+    <ClInclude Include="Json\rapidjson\writer.h">
+      <Filter>Json</Filter>
+    </ClInclude>
+    <ClInclude Include="Json\rapidjson\internal\pow10.h">
+      <Filter>Json\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="Json\rapidjson\internal\stack.h">
+      <Filter>Json\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="Json\rapidjson\internal\strfunc.h">
+      <Filter>Json\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelInterface.h">
+      <Filter>Source Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="ConvertStringToModel.h">
+      <Filter>Source Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="LoginRequest.h">
+      <Filter>Source Files\Models\Requests</Filter>
+    </ClInclude>
+    <ClInclude Include="LoginResponse.h">
+      <Filter>Source Files\Models\Responses</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
