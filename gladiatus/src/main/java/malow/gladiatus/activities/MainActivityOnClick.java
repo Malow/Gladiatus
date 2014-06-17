@@ -22,8 +22,8 @@ public class MainActivityOnClick
         @Override
         public void onClick(View v)
         {
-            String username = ((EditText) Globals.mainActivity.findViewById(R.id.usernameField)).getText().toString();
-            String password = ((EditText) Globals.mainActivity.findViewById(R.id.passwordField)).getText().toString();
+            String username = ((EditText) Globals.mainActivity.findViewById(R.id.login_usernameField)).getText().toString();
+            String password = ((EditText) Globals.mainActivity.findViewById(R.id.login_passwordField)).getText().toString();
 
             String encryptedPassword = MD5Encrypter.encrypt(password);
 

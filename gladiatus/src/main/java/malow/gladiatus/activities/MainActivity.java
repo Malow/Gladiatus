@@ -4,15 +4,12 @@ import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.support.v4.app.FragmentActivity;
-import android.widget.TextView;
 
 import malow.gladiatus.Globals;
 import malow.gladiatus.R;
@@ -28,8 +25,8 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         Globals.mainActivity = this;
         setContentView(R.layout.activity_main);
 
-        Button loginButton = (Button) findViewById(R.id.loginButton);
-        loginButton.setOnClickListener(MainActivityOnClick.login());
+        //Button loginButton = (Button) findViewById(R.id.loginButton);
+        //loginButton.setOnClickListener(MainActivityOnClick.login());
 
 
         // Set up the action bar to show tabs.
@@ -64,11 +61,11 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     {
         // When the given tab is selected, show the tab contents in the
         // container view.
-        Fragment fragment = new DummySectionFragment();
+        Fragment fragment = new MainActivityFragment();
         Bundle args = new Bundle();
-        args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, tab.getPosition() + 1);
+        args.putInt(MainActivityFragment.TAB_NUMBER, tab.getPosition());
         fragment.setArguments(args);
-        getFragmentManager().beginTransaction().replace(R.id.LoginMainFrame, fragment).commit();
+        getFragmentManager().beginTransaction().replace(R.id.LoginTabView, fragment).commit();
     }
 
     @Override
@@ -84,23 +81,31 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
-
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
-    public static class DummySectionFragment extends Fragment
+    public static class MainActivityFragment extends Fragment
     {
-        public static final String ARG_SECTION_NUMBER = "placeholder_text";
+        public static final String TAB_NUMBER = "tab_number";
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            TextView textView = new TextView(getActivity());
-            textView.setGravity(Gravity.CENTER);
-            textView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
-            return textView;
+            int tab = getArguments().getInt(TAB_NUMBER);
+            if(tab == 0)
+            {
+                return inflater.inflate(R.layout.login_screen, container, false);
+            }
+            else if(tab == 1)
+            {
+                return inflater.inflate(R.layout.register_screen, container, false);
+            }
+            else
+            {
+                return inflater.inflate(R.layout.recover_screen, container, false);
+            }
         }
     }
 

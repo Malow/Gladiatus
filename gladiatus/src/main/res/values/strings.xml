@@ -7,8 +7,11 @@
 
     <string name="username_label">Username:</string>
     <string name="password_label">Password:</string>
+    <string name="email_label">Email:</string>
 
     <string name="login_button">Log In</string>
+    <string name="register_button">Register</string>
+    <string name="recover_button">Receive new password</string>
 
     <string name="login_tab_1">Login</string>
     <string name="login_tab_2">Register</string>
