@@ -9,6 +9,7 @@ GRANT ALL PRIVILEGES ON Gladiatus.* TO GladiatusServer@localhost;
 CREATE TABLE Accounts (id INT NOT NULL AUTO_INCREMENT, 
     username VARCHAR(40) NOT NULL UNIQUE,
     password VARCHAR(40) NOT NULL, 
+    email VARCHAR(40) NOT NULL, 
     session_id VARCHAR(40),
     PRIMARY KEY (ID));
 

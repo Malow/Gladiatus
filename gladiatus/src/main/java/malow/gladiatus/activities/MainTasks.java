@@ -1,7 +1,9 @@
 package malow.gladiatus.activities;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -10,11 +12,13 @@ import malow.gladiatus.NetworkClient;
 import malow.gladiatus.R;
 import malow.gladiatus.common.models.ModelInterface;
 import malow.gladiatus.common.models.requests.LoginRequest;
+import malow.gladiatus.common.models.requests.RegisterRequest;
 import malow.gladiatus.common.models.responses.LoginResponse;
+import malow.gladiatus.common.models.responses.RegisterFailedResponse;
 
 public class MainTasks
 {
-    public static void LogIn(final LoginRequest loginRequest)
+    public static void LoginTask(final LoginRequest loginRequest)
     {
         new AsyncTask<Void, Void, Void>() {
             @Override
@@ -22,27 +26,64 @@ public class MainTasks
                 ModelInterface loginResponse = NetworkClient.sendAndReceive(loginRequest);
                 if(loginResponse instanceof LoginResponse)
                 {
-                    final String errorCode = ((LoginResponse) loginResponse).errorCode;
-                    if(errorCode.isEmpty())
-                    {
-                        Globals.sessionId = ((LoginResponse) loginResponse).sessionId;
-                        Log.i(this.getClass().getSimpleName(), "Login successfull, sessionId: " + Globals.sessionId);
-                        GoToCharacterInfo();
-                    }
-                    else
-                    {
-                        SetErrorText(errorCode);
-                        Log.i(this.getClass().getSimpleName(), "Login failed, errorCode: " + errorCode);
-                    }
+                    FinishLoginAttempt((LoginResponse) loginResponse);
                 }
                 else
                 {
-                    SetErrorText("Error: Unexpected response");
+                    SetLoginErrorText("Error: Unexpected response");
                     Log.i(this.getClass().getSimpleName(), "Login failed, unexpected response: " + loginResponse);
                 }
                 return null;
             }
         }.execute();
+    }
+
+    public static void Register(final RegisterRequest registerRequest)
+    {
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                ModelInterface registerResponse = NetworkClient.sendAndReceive(registerRequest);
+                // If we receive LoginResponse it means that register was successful and we logged in.
+                if(registerResponse instanceof LoginResponse)
+                {
+                    if(!FinishLoginAttempt((LoginResponse) registerResponse))
+                    {
+                        SwitchToTab(0); // Switch to login screen if register was successful but login failed.
+                    }
+                }
+                else if(registerResponse instanceof RegisterFailedResponse)
+                {
+                    String errorCode = ((RegisterFailedResponse) registerResponse).errorCode;
+                    SetRegisterErrorText(errorCode);
+                    Log.i("MainTasks", "Register failed, errorCode: " + errorCode);
+                }
+                else
+                {
+                    SetRegisterErrorText("Error: Unexpected response");
+                    Log.i(this.getClass().getSimpleName(), "Register failed, unexpected response: " + registerResponse);
+                }
+                return null;
+            }
+        }.execute();
+    }
+
+    public static boolean FinishLoginAttempt(LoginResponse loginResponse)
+    {
+        final String errorCode = loginResponse.errorCode;
+        if(errorCode.isEmpty())
+        {
+            Globals.sessionId = loginResponse.sessionId;
+            Log.i("MainTasks", "Login successful, sessionId: " + Globals.sessionId);
+            GoToCharacterInfo();
+            return true;
+        }
+        else
+        {
+            SetLoginErrorText(errorCode);
+            Log.i("MainTasks", "Login failed, errorCode: " + errorCode);
+            return false;
+        }
     }
 
     public static void GoToCharacterInfo()
@@ -51,7 +92,7 @@ public class MainTasks
             Globals.mainActivity.startActivity(i);
     }
 
-    public static void SetErrorText(final String errorCode)
+    public static void SetLoginErrorText(final String errorCode)
     {
         Globals.mainActivity.runOnUiThread(new Runnable()
         {
@@ -62,5 +103,27 @@ public class MainTasks
                 errorText.setText(errorCode);
             }
         });
+    }
+
+    public static void SetRegisterErrorText(final String errorCode)
+    {
+        Globals.mainActivity.runOnUiThread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                TextView errorText = (TextView) Globals.mainActivity.findViewById(R.id.registerErrorText);
+                errorText.setText(errorCode);
+            }
+        });
+    }
+
+    public static void SwitchToTab(int tab)
+    {
+        Fragment fragment = new MainActivityFragment();
+        Bundle args = new Bundle();
+        args.putInt(MainActivityFragment.TAB_NUMBER, tab);
+        fragment.setArguments(args);
+        Globals.mainActivity.getFragmentManager().beginTransaction().replace(R.id.LoginTabView, fragment).commit();
     }
 }

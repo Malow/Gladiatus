@@ -5,6 +5,7 @@ import java.util.List;
 
 import malow.gladiatus.common.models.requests.CharacterInfoRequest;
 import malow.gladiatus.common.models.requests.LoginRequest;
+import malow.gladiatus.common.models.requests.RegisterRequest;
 import malow.gladiatus.common.models.*;
 
 import malow.malowlib.NetworkChannel;
@@ -65,6 +66,10 @@ public class Server extends Process
 				if(request instanceof LoginRequest)
 				{
 					RequestHandler.handleLoginRequest((LoginRequest) request, sender);
+				}
+				else if(request instanceof RegisterRequest)
+				{
+					RequestHandler.handleRegisterRequest((RegisterRequest) request, sender);
 				}
 				else if(request instanceof CharacterInfoRequest)
 				{

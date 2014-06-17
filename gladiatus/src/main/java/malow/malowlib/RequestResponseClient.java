@@ -1,14 +1,11 @@
 package malow.malowlib;
 
-import java.lang.*;
-
 public class RequestResponseClient extends Process
 {
     private String ip;
     private int port;
     private NetworkChannel nc;
-    private Process notifier;
-
+    
     private String response = null;
 
     public RequestResponseClient(String ip, int port)

@@ -1,18 +1,21 @@
 package malow.gladiatus.common.models.responses;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 
 import malow.gladiatus.common.models.ModelInterface;
 
-public class NoCharacterFoundResponse implements ModelInterface
+public class RegisterFailedResponse implements ModelInterface
 {
+    public final String errorCode;
 
     @JsonCreator
-    public NoCharacterFoundResponse()
+    public RegisterFailedResponse(@JsonProperty("errorCode") String errorCode)
     {
+        this.errorCode = errorCode;
     }
 
     @Override

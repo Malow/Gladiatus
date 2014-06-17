@@ -7,11 +7,11 @@ import java.io.IOException;
 
 import malow.gladiatus.common.models.ModelInterface;
 
-public class CharacterCreationSuccessful implements ModelInterface
+public class CharacterCreationSuccessfulResponse implements ModelInterface
 {
 
     @JsonCreator
-    public CharacterCreationSuccessful()
+    public CharacterCreationSuccessfulResponse()
     {
     }
 

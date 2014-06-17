@@ -7,10 +7,9 @@ import android.util.Log;
 
 import malow.gladiatus.Globals;
 import malow.gladiatus.NetworkClient;
-import malow.gladiatus.R;
 import malow.gladiatus.common.models.ModelInterface;
 import malow.gladiatus.common.models.requests.CharacterCreateRequest;
-import malow.gladiatus.common.models.responses.CharacterCreationSuccessful;
+import malow.gladiatus.common.models.responses.CharacterCreationSuccessfulResponse;
 
 public class CharacterCreateTasks
 {
@@ -21,7 +20,7 @@ public class CharacterCreateTasks
             protected Void doInBackground(Void... voids)
             {
                 ModelInterface response = NetworkClient.sendAndReceive(request);
-                if(response instanceof CharacterCreationSuccessful)
+                if(response instanceof CharacterCreationSuccessfulResponse)
                 {
                     GoToCharacterInfo();
                 }
