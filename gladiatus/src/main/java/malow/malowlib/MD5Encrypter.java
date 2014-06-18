@@ -1,7 +1,5 @@
 package malow.malowlib;
 
-import android.util.Log;
-
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -25,7 +23,7 @@ public class MD5Encrypter
     }
     catch (NoSuchAlgorithmException ex)
     {
-        Log.e(MD5Encrypter.class.getName(), "No such Algorithm exception: " + ex);
+    	
     }
     return null;
    }

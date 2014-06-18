@@ -4,3 +4,7 @@
 .DS_Store
 /.idea
 /build
+/GladiatusServerJava/.project
+/GladiatusServerJava/.classpath
+/GladiatusServerJava/.settings
+/GladiatusServerJava/bin
