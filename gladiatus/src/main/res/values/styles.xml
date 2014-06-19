@@ -15,7 +15,7 @@
     </style>
 
     <style name="GladiatusTheme.TabView" parent="android:Widget.Holo.ActionBar.TabView">
-        <item name="android:background">@color/GladiatusColor6</item>
+        <item name="android:background">@drawable/actionbar_tab_indicator</item>
         <item name="android:gravity">center</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:paddingLeft">10dp</item>
