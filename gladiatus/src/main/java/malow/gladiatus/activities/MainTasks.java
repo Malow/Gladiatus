@@ -38,7 +38,7 @@ public class MainTasks
         }.execute();
     }
 
-    public static void Register(final RegisterRequest registerRequest)
+    public static void RegisterTask(final RegisterRequest registerRequest)
     {
         new AsyncTask<Void, Void, Void>() {
             @Override
@@ -56,12 +56,12 @@ public class MainTasks
                 {
                     String errorCode = ((RegisterFailedResponse) registerResponse).errorCode;
                     SetRegisterErrorText(errorCode);
-                    Log.i("MainTasks", "Register failed, errorCode: " + errorCode);
+                    Log.i("MainTasks", "RegisterTask failed, errorCode: " + errorCode);
                 }
                 else
                 {
                     SetRegisterErrorText("Error: Unexpected response");
-                    Log.i(this.getClass().getSimpleName(), "Register failed, unexpected response: " + registerResponse);
+                    Log.i(this.getClass().getSimpleName(), "RegisterTask failed, unexpected response: " + registerResponse);
                 }
                 return null;
             }

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import malow.gladiatus.common.models.requests.CharacterInfoRequest;
 import malow.gladiatus.common.models.requests.LoginRequest;
+import malow.gladiatus.common.models.requests.RegisterRequest;
 import malow.gladiatus.common.models.responses.CharacterInfoResponse;
 import malow.gladiatus.common.models.responses.LoginResponse;
 import malow.gladiatus.common.models.responses.NoCharacterFoundResponse;
@@ -21,6 +22,7 @@ public class ConvertStringToModel
         try { return mapper.readValue(networkString, CharacterInfoResponse.class); } catch (Exception e) {}
         try { return mapper.readValue(networkString, NoCharacterFoundResponse.class); } catch (Exception e) {}
         try { return mapper.readValue(networkString, SessionExpiredResponse.class); } catch (Exception e) {}
+        try { return mapper.readValue(networkString, RegisterRequest.class); } catch (Exception e) {}
 
         return null;
     }

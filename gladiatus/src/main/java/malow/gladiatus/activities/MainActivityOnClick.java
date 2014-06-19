@@ -48,7 +48,7 @@ public class MainActivityOnClick
 
             String encryptedPassword = MD5Encrypter.encrypt(password);
 
-            MainTasks.Register(new RegisterRequest(username, encryptedPassword, email));
+            MainTasks.RegisterTask(new RegisterRequest(username, encryptedPassword, email));
         }
     }
 }

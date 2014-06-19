@@ -34,10 +34,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         actionBar.addTab(actionBar.newTab().setText(R.string.login_tab_1).setTabListener(this));
         actionBar.addTab(actionBar.newTab().setText(R.string.login_tab_2).setTabListener(this));
         actionBar.addTab(actionBar.newTab().setText(R.string.login_tab_3).setTabListener(this));
-
-
-        Button loginButton = (Button) findViewById(R.id.login_button);
-        loginButton.setOnClickListener(MainActivityOnClick.login());
     }
 
     @Override
