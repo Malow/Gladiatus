@@ -1,12 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- File created by the Android Action Bar Style Generator
+
+     Copyright (C) 2011 The Android Open Source Project
+     Copyright (C) 2012 readyState Software Ltd
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
 <resources>
-    <style name="GladiatusTheme" parent="android:Theme.Holo.Light">
-        <item name="android:actionBarStyle">@style/GladiatusTheme.ActionBar</item>
-        <item name="android:actionBarTabBarStyle">@style/GladiatusTheme.TabBar</item>
-        <item name="android:actionBarTabStyle">@style/GladiatusTheme.TabView</item>
+
+    <style name="GladiatusTheme" parent="@android:style/Theme.Holo.Light">
+        <item name="android:actionBarItemBackground">@drawable/selectable_background_gladiatustheme</item>
+        <item name="android:popupMenuStyle">@style/PopupMenu.Gladiatustheme</item>
+        <item name="android:dropDownListViewStyle">@style/DropDownListView.Gladiatustheme</item>
+        <item name="android:actionBarTabStyle">@style/ActionBarTabStyle.Gladiatustheme</item>
+        <item name="android:actionDropDownStyle">@style/DropDownNav.Gladiatustheme</item>
+        <item name="android:actionBarStyle">@style/ActionBar.Solid.Gladiatustheme</item>
+        <item name="android:actionModeBackground">@drawable/cab_background_top_gladiatustheme</item>
+        <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_gladiatustheme</item>
+        <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Gladiatustheme</item>
+
     </style>
 
-    <style name="GladiatusTheme.ActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
-        <item name="android:background">@color/GladiatusColor10</item>
+    <style name="ActionBar.Solid.Gladiatustheme" parent="@android:style/Widget.Holo.Light.ActionBar.Solid">
+        <item name="android:background">@drawable/ab_solid_gladiatustheme</item>
+        <item name="android:backgroundStacked">@drawable/ab_stacked_solid_gladiatustheme</item>
+        <item name="android:backgroundSplit">@drawable/ab_bottom_solid_gladiatustheme</item>
+        <item name="android:progressBarStyle">@style/ProgressBar.Gladiatustheme</item>
         <item name="android:titleTextStyle">@style/GladiatusTheme.ActionBar.TitleTextStyle</item>
     </style>
 
@@ -14,21 +44,80 @@
         <item name="android:textColor">#FFFFFF</item>
     </style>
 
-    <style name="GladiatusTheme.TabView" parent="android:Widget.Holo.ActionBar.TabView">
-        <item name="android:background">@drawable/actionbar_tab_indicator</item>
-        <item name="android:gravity">center</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:paddingLeft">10dp</item>
-        <item name="android:paddingRight">10dp</item>
-        <item name="android:textColor">#000000</item>
+    <style name="ActionBar.Transparent.Gladiatustheme" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">@drawable/ab_transparent_gladiatustheme</item>
+        <item name="android:progressBarStyle">@style/ProgressBar.Gladiatustheme</item>
     </style>
 
-    <style name="GladiatusTheme.TabBar" parent="@android:style/Widget.Holo.ActionBar.TabBar">
-        <item name="android:showDividers">middle</item>
-        <!--  <item name="android:divider">@drawable/app_icon</item>
-         <item name="android:background">@drawable/app_icon</item> -->
-         <item name="android:dividerPadding">0dp</item>
-     </style>
+    <style name="PopupMenu.Gladiatustheme" parent="@android:style/Widget.Holo.Light.ListPopupWindow">
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_gladiatustheme</item>
+    </style>
+
+    <style name="DropDownListView.Gladiatustheme" parent="@android:style/Widget.Holo.Light.ListView.DropDown">
+        <item name="android:listSelector">@drawable/selectable_background_gladiatustheme</item>
+    </style>
+
+    <style name="ActionBarTabStyle.Gladiatustheme" parent="@android:style/Widget.Holo.Light.ActionBar.TabView">
+        <item name="android:background">@drawable/tab_indicator_ab_gladiatustheme</item>
+    </style>
+
+    <style name="DropDownNav.Gladiatustheme" parent="@android:style/Widget.Holo.Light.Spinner">
+        <item name="android:background">@drawable/spinner_background_ab_gladiatustheme</item>
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_gladiatustheme</item>
+        <item name="android:dropDownSelector">@drawable/selectable_background_gladiatustheme</item>
+    </style>
+
+    <style name="ProgressBar.Gladiatustheme" parent="@android:style/Widget.Holo.Light.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/progress_horizontal_gladiatustheme</item>
+    </style>
+
+    <style name="ActionButton.CloseMode.Gladiatustheme" parent="@android:style/Widget.Holo.Light.ActionButton.CloseMode">
+        <item name="android:background">@drawable/btn_cab_done_gladiatustheme</item>
+    </style>
+
+    <!-- this style is only referenced in a Light.DarkActionBar based theme -->
+    <style name="Theme.Gladiatustheme.Widget" parent="@android:style/Theme.Holo">
+        <item name="android:popupMenuStyle">@style/PopupMenu.Gladiatustheme</item>
+        <item name="android:dropDownListViewStyle">@style/DropDownListView.Gladiatustheme</item>
+    </style>
+
+</resources>
 
 
- </resources>
+
+    <!--
+    <resources>
+        <style name="GladiatusTheme" parent="android:Theme.Holo.Light">
+            <item name="android:actionBarStyle">@style/GladiatusTheme.ActionBar</item>
+            <item name="android:actionBarTabBarStyle">@style/GladiatusTheme.TabBar</item>
+            <item name="android:actionBarTabStyle">@style/GladiatusTheme.TabView</item>
+        </style>
+
+        <style name="GladiatusTheme.ActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
+            <item name="android:background">@color/GladiatusColor10</item>
+            <item name="android:titleTextStyle">@style/GladiatusTheme.ActionBar.TitleTextStyle</item>
+        </style>
+
+        <style name="GladiatusTheme.ActionBar.TitleTextStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+            <item name="android:textColor">#FFFFFF</item>
+        </style>
+
+        <style name="GladiatusTheme.TabView" parent="android:Widget.Holo.ActionBar.TabView">
+            <item name="android:background">@drawable/actionbar_tab_indicator</item>
+            <item name="android:gravity">center</item>
+            <item name="android:layout_gravity">center</item>
+            <item name="android:paddingLeft">10dp</item>
+            <item name="android:paddingRight">10dp</item>
+            <item name="android:textColor">#000000</item>
+        </style>
+
+        <style name="GladiatusTheme.TabBar" parent="@android:style/Widget.Holo.ActionBar.TabBar">
+            <item name="android:showDividers">middle</item>
+            <item name="android:divider">@drawable/app_icon</item>
+             <item name="android:background">@drawable/app_icon</item>
+             <item name="android:dividerPadding">0dp</item>
+         </style>
+
+
+     </resources>
+    -->

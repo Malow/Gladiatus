@@ -6,18 +6,18 @@
     <!-- Non focused states -->
     <item android:state_focused="false" android:state_selected="false"
         android:state_pressed="false"
-        android:drawable="@drawable/tab_unselected" />
+        android:drawable="@drawable/tab_unselected_gladiatustheme" />
     <item android:state_focused="false" android:state_selected="true"
         android:state_pressed="false"
-        android:drawable="@drawable/tab_selected" />
+        android:drawable="@drawable/tab_selected_gladiatustheme" />
 
     <!-- Focused states (such as when focused with a d-pad or mouse hover) -->
     <item android:state_focused="true" android:state_selected="false"
         android:state_pressed="false"
-        android:drawable="@drawable/tab_unselected_focused" />
+        android:drawable="@drawable/tab_unselected_focused_gladiatustheme" />
     <item android:state_focused="true" android:state_selected="true"
         android:state_pressed="false"
-        android:drawable="@drawable/tab_selected_focused" />
+        android:drawable="@drawable/tab_selected_focused_gladiatustheme" />
 
 
     <!-- STATES WHEN BUTTON IS PRESSED -->
@@ -25,17 +25,17 @@
     <!-- Non focused states -->
     <item android:state_focused="false" android:state_selected="false"
         android:state_pressed="true"
-        android:drawable="@drawable/tab_unselected_pressed" />
+        android:drawable="@drawable/tab_unselected_pressed_gladiatustheme" />
     <item android:state_focused="false" android:state_selected="true"
         android:state_pressed="true"
-        android:drawable="@drawable/tab_selected_pressed" />
+        android:drawable="@drawable/tab_selected_pressed_gladiatustheme" />
 
     <!-- Focused states (such as when focused with a d-pad or mouse hover) -->
     <item android:state_focused="true" android:state_selected="false"
         android:state_pressed="true"
-        android:drawable="@drawable/tab_unselected_pressed" />
+        android:drawable="@drawable/tab_unselected_pressed_gladiatustheme" />
     <item android:state_focused="true" android:state_selected="true"
         android:state_pressed="true"
-        android:drawable="@drawable/tab_selected_pressed" />
+        android:drawable="@drawable/tab_selected_pressed_gladiatustheme" />
 
 </selector>

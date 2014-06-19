@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:id="@+id/register_screen">
 
-    <include android:id="@+id/gladiatus_frame" layout="@layout/gladiatus_frame" />
+    <include android:id="@+id/gladiatus_frame" layout="@layout/gladiatus_frame_topless" />
 
 
     <LinearLayout
