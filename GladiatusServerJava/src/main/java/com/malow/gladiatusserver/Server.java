@@ -3,6 +3,7 @@ package com.malow.gladiatusserver;
 import java.util.ArrayList;
 import java.util.List;
 
+import malow.gladiatus.common.models.requests.BasicAbilitiesRequest;
 import malow.gladiatus.common.models.requests.CharacterInfoRequest;
 import malow.gladiatus.common.models.requests.LoginRequest;
 import malow.gladiatus.common.models.requests.RegisterRequest;
@@ -74,6 +75,10 @@ public class Server extends Process
 				else if(request instanceof CharacterInfoRequest)
 				{
 					RequestHandler.handleCharacterInfoRequest((CharacterInfoRequest) request, sender);
+				}
+				else if(request instanceof BasicAbilitiesRequest)
+				{
+					RequestHandler.handleBasicAbilitiesRequest((BasicAbilitiesRequest) request, sender);
 				}
 				else
 				{

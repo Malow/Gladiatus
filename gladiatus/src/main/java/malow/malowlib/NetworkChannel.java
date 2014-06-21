@@ -27,14 +27,14 @@ public class NetworkChannel extends Process
 		this.id = NetworkChannel.nextCID;
 		NetworkChannel.nextCID++;
 		
-		try {
+		try
+        {
 			this.sock = new Socket(ip, port);
-		} catch (UnknownHostException e) {
-			this.stayAlive = false;
-			System.out.println("Error creating socket, unknown host. Channel: " + this.id);
-		} catch (IOException e) {
-			this.stayAlive = false;
-			System.out.println("Error creating socket, other exception. Channel: " + this.id);
+		}
+        catch (Exception e)
+        {
+			this.Close();
+			System.out.println("Error creating socket: " + ip + ":" + port + ". Channel: " + this.id);
 		}
 	}
 		
@@ -49,8 +49,15 @@ public class NetworkChannel extends Process
 		for(int i = 0; i < msg.length(); i++)
 			bufs[i] = (byte)msg.charAt(i);
 		
-		try { this.sock.getOutputStream().write(bufs); } 
-		catch (IOException e1) { System.out.println("Error sending data. Channel: " + this.id); }
+		try
+        {
+            this.sock.getOutputStream().write(bufs);
+        }
+		catch (IOException e1)
+        {
+            this.Close();
+            System.out.println("Error sending data. Channel: " + this.id);
+        }
 	}
 
 	public void Life()
@@ -82,6 +89,9 @@ public class NetworkChannel extends Process
 	
 	public void CloseSpecific()
 	{
+        if(this.sock == null)
+            return;
+
 		try { this.sock.shutdownInput(); } 
 		catch (IOException e1) { System.out.println("Error trying to perform shutdown on socket from a ->Close() call. Channel: " + this.id); }
 		try { this.sock.shutdownOutput(); } 
@@ -120,18 +130,21 @@ public class NetworkChannel extends Process
 				{ 
 					retCode = this.sock.getInputStream().read(bufs); 
 				} 
-				catch (IOException e) 
-				{	
-					if(retCode == -1)
-					{
-						this.Close();
-						System.out.println("Error recieving data by channel: " + this.id + ". Error: " + retCode + ". Probably due to crash/improper dissconnect");
-					}
-					else if(retCode == 0)
-					{
-						this.Close();
-						System.out.println("Channel " + this.id + " dissconnected, closing.");
-					}
+				catch (Exception e)
+				{
+                    this.Close();
+                    System.out.println("Channel " + this.id + " exception when receiving, closing. " + e);
+				}
+
+				if(retCode == -1)
+				{
+					this.Close();
+					System.out.println("Error receiving data by channel: " + this.id + ". Error: " + retCode + ". Probably due to crash/improper disconnect");
+				}
+				else if(retCode == 0)
+				{
+					this.Close();
+					System.out.println("Channel " + this.id + " disconnected, closing.");
 				}
 				
 				if(retCode > 0)

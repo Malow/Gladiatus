@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:id="@+id/recover_screen">
 
-    <include android:id="@+id/gladiatus_frame" layout="@layout/gladiatus_frame_topless" />
+    <include android:id="@+id/gladiatus_frame" layout="@layout/gladiatus_frame" />
 
 
     <LinearLayout
@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/RecoverView"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="25dp"
         android:layout_marginRight="15dp"
         android:layout_marginBottom="15dp">
 
@@ -22,6 +22,8 @@
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             >
 
             <TextView
@@ -30,8 +32,8 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/email_label"
                 android:id="@+id/textView3"
-                android:layout_weight="1"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:textSize="18sp"/>
 
             <EditText
                 android:layout_width="wrap_content"
@@ -39,7 +41,7 @@
                 android:inputType="textEmailAddress"
                 android:ems="10"
                 android:id="@+id/recover_emailField"
-                android:layout_weight="1"/>
+                />
         </LinearLayout>
 
         <Button
@@ -48,17 +50,29 @@
             android:text="@string/recover_button"
             android:id="@+id/recover_button"
             android:layout_gravity="center_horizontal"
-            android:textSize="25sp"
-            />
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/registerErrorText"
+            android:id="@+id/recoverErrorText"
             android:layout_gravity="center_horizontal"
-            />
+            android:textColor="#ffa40912"/>
 
     </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:src="@drawable/login_bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:scaleType="fitEnd"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:contentDescription="@string/a_fucking_image"/>
 
 </RelativeLayout>

@@ -15,8 +15,18 @@ public class RequestResponseClient extends Process
         this.Start();
     }
 
-    public String sendAndReceive(String msg)
+    public static class ConnectionBrokenException extends Exception
     {
+
+    }
+
+    public String sendAndReceive(String msg) throws ConnectionBrokenException
+    {
+        if(!this.isAlive())
+        {
+            throw new ConnectionBrokenException();
+        }
+
         this.nc.SendData(msg);
 
         while(this.response == null)
@@ -36,6 +46,8 @@ public class RequestResponseClient extends Process
 
     public boolean isAlive()
     {
+        if(this.nc == null)
+            return false;
         return this.nc.GetState() == Process.RUNNING;
     }
 

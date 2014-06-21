@@ -4,8 +4,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
+import malow.gladiatus.common.models.Ability;
+import malow.gladiatus.common.models.responses.BasicAbilitiesResponse;
 import malow.gladiatus.common.models.responses.CharacterInfoResponse;
 
 public class SQLConnector 
@@ -34,7 +38,6 @@ public class SQLConnector
 	{
 		String sessionId = "";
 		Class.forName("com.mysql.jdbc.Driver");
-		
 		Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/Gladiatus?" + "user=GladiatusServer&password=qqiuIUr348EW");
 		  
 		PreparedStatement accountStatement = connect.prepareStatement("SELECT * FROM Accounts WHERE username = ? ; ");
@@ -81,12 +84,9 @@ public class SQLConnector
 		accountStatement.setString(1, sessionId);
 		ResultSet accountResult = accountStatement.executeQuery();
 		
-		
-		int accountId = -1;
-		
 		if (accountResult.next()) 
 		{
-			accountId = accountResult.getInt("id");
+			int accountId = accountResult.getInt("id");
 			PreparedStatement characterStatement = connect.prepareStatement("SELECT * FROM Characters WHERE account_id = ? ; ");
 			characterStatement.setInt(1, accountId);
 			ResultSet characterResult = characterStatement.executeQuery();
@@ -167,5 +167,27 @@ public class SQLConnector
 		
 		connect.close();
 		return ret;
+	}
+
+	public static BasicAbilitiesResponse getBasicAbilities() throws Exception
+	{
+		List<Ability> abilities = new ArrayList<Ability>();
+		Class.forName("com.mysql.jdbc.Driver");
+		Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/Gladiatus?" + "user=GladiatusServer&password=qqiuIUr348EW");
+		  
+		PreparedStatement accountStatement = connect.prepareStatement("SELECT * FROM Basic_abilities; ");
+		ResultSet accountResult = accountStatement.executeQuery();
+		
+		while (accountResult.next()) 
+		{
+			int abilityId = accountResult.getInt("id");
+			String name = accountResult.getString("name");
+			String description = accountResult.getString("description");
+			String tags = accountResult.getString("tags");
+			
+			abilities.add(new Ability(abilityId, name, description, tags));
+		}
+		
+		return new BasicAbilitiesResponse(abilities);
 	}
 } 

@@ -5,13 +5,19 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import android.widget.ImageButton;
+
+import java.util.ArrayList;
 
 import malow.gladiatus.Globals;
 import malow.gladiatus.R;
+import malow.gladiatus.common.models.Ability;
+import malow.gladiatus.common.models.Gladiator;
 
 public class CharacterCreateActivity extends Activity
 {
+    public static Gladiator creatingCharacter = new Gladiator();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -20,18 +26,21 @@ public class CharacterCreateActivity extends Activity
         setContentView(R.layout.activity_character_create);
         Globals.characterCreateActivity = this;
 
-        ImageButton imageButton1 = (ImageButton) findViewById(R.id.image_1);
-        imageButton1.setOnClickListener(CharacterCreateOnClick.selectImage(1));
-        ImageButton imageButton2 = (ImageButton) findViewById(R.id.image_2);
-        imageButton2.setOnClickListener(CharacterCreateOnClick.selectImage(2));
-        ImageButton imageButton3 = (ImageButton) findViewById(R.id.image_3);
-        imageButton3.setOnClickListener(CharacterCreateOnClick.selectImage(3));
+        ImageButton imagePickButton = (ImageButton) findViewById(R.id.create_character_pick_image);
+        imagePickButton.setOnClickListener(CharacterCreateOnClick.openImagePickerPopup());
+
+        creatingCharacter.abilities.add(new Ability(1, "Attack", "Basic attack.", "[Active] [Range:Weapon]"));
+        creatingCharacter.abilities.add(new Ability(-1, "", "<Press here to choose an ability>", ""));
+        creatingCharacter.abilities.add(new Ability(-1, "", "<Press here to choose an ability>", ""));
+        CharacterCreateTasks.UpdateAbilitiesList();
     }
 
     @Override
     protected void onResume()
     {
         super.onResume();
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
 
     @Override

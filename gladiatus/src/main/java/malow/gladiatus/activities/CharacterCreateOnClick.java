@@ -1,44 +1,34 @@
 package malow.gladiatus.activities;
 
-import android.graphics.Color;
-import android.graphics.PorterDuff;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import malow.gladiatus.Globals;
 import malow.gladiatus.R;
-import malow.gladiatus.common.models.requests.LoginRequest;
+import malow.gladiatus.common.models.Ability;
 
 public class CharacterCreateOnClick
 {
-
     private static CharacterCreateOnClick self = new CharacterCreateOnClick();
 
-    public static SelectImage selectImage(int id)
+    public static OpenImagePickerPopup openImagePickerPopup()
     {
-        return self.new SelectImage(id);
+        return self.new OpenImagePickerPopup();
     }
-    public class SelectImage implements View.OnClickListener
+    public class OpenImagePickerPopup implements View.OnClickListener
     {
-        private int id;
-
-        public SelectImage(int id)
-        {
-            this.id = id;
-        }
         @Override
         public void onClick(View v)
         {
-            ImageButton button1 = ((ImageButton) Globals.characterCreateActivity.findViewById(R.id.image_1));
-            ImageButton button2 = ((ImageButton) Globals.characterCreateActivity.findViewById(R.id.image_2));
-            ImageButton button3 = ((ImageButton) Globals.characterCreateActivity.findViewById(R.id.image_3));
-            ImageButton selected = ((ImageButton) v);
-
-            button1.setAlpha(0.3f);
-            button2.setAlpha(0.3f);
-            button3.setAlpha(0.3f);
-            selected.setAlpha(1.0f);
+            CharacterCreateTasks.OpenImagePickerPopup();
         }
     }
 
@@ -51,13 +41,33 @@ public class CharacterCreateOnClick
         @Override
         public void onClick(View v)
         {
-            String characterName = ((EditText) Globals.characterCreateActivity.findViewById(R.id.characterNameField)).getText().toString();
+            //String characterName = ((EditText) Globals.characterCreateActivity.findViewById(R.id.characterNameField)).getText().toString();
             String characterImage;
             String health;
             String armor;
             String strength;
             String dexterity;
             String initiative;
+        }
+    }
+
+    public static OpenAbilityPickerPopup openAbilityPickerPopup(Ability removeAbility)
+    {
+        return self.new OpenAbilityPickerPopup(removeAbility);
+    }
+    public class OpenAbilityPickerPopup implements  View.OnClickListener
+    {
+        public final Ability removeAbility;
+
+        public OpenAbilityPickerPopup(Ability removeAbility)
+        {
+            this.removeAbility = removeAbility;
+        }
+
+        @Override
+        public void onClick(View v)
+        {
+            CharacterCreateTasks.OpenAbilityPickerPopup(this.removeAbility);
         }
     }
 }

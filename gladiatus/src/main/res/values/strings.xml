@@ -17,4 +17,35 @@
     <string name="login_tab_2">Register</string>
     <string name="login_tab_3">Recover</string>
 
+    <string name="character_creation">Character Creation</string>
+    <string name="name_label">Name:</string>
+    <string name="image_label">Image:</string>
+
+    <string name="stats_label">Stats:</string>
+    <string name="points_left_label">Points left:</string>
+    <string name="base_label">Base</string>
+    <string name="extra_label">Extra</string>
+    <string name="total_label">Total</string>
+    <string name="armor_label">Armor:</string>
+    <string name="initiative_label">Initiative:</string>
+
+    <string name="health_label">Health:</string>
+    <string name="strength_label">Strength:</string>
+    <string name="dexterity_label">Dexterity:</string>
+    <string name="intelligence_label">Intelligence:</string>
+    <string name="willpower_label">Willpower:</string>
+
+
+    <string name="create_character_button">Create Character</string>
+
+
+    <string name="minus_label">-</string>
+    <string name="plus_label">+</string>
+
+
+    <string name="starting_skills_label">Starting Skills:</string>
+    <string name="left_label">left</string>
+
+    <string name="a_fucking_image">A fucking image</string>
+
 </resources>
