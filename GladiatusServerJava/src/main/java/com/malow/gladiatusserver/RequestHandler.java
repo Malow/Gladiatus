@@ -19,6 +19,7 @@ import malow.gladiatus.common.models.responses.CharacterCreationFailedResponse;
 import malow.gladiatus.common.models.responses.LoginResponse;
 import malow.gladiatus.common.models.responses.NoCharacterFoundResponse;
 import malow.gladiatus.common.models.responses.SessionExpiredResponse;
+import malow.gladiatus.common.models.responses.SomethingWentHorriblyWrongResponse;
 import malow.malowlib.NetworkChannel;
 
 public class RequestHandler 
@@ -99,6 +100,7 @@ public class RequestHandler
 			}
 			else
 			{
+				response = new SomethingWentHorriblyWrongResponse();
 				System.out.println("Client " + (sender.GetChannelID() + 1) + " Unexpected character info exception: " + e);
 				e.printStackTrace();
 			}
@@ -142,7 +144,6 @@ public class RequestHandler
 			if(e instanceof CharacternameTakenException)
 			{
 				System.out.println("Client " + (sender.GetChannelID() + 1) + " Character creation failed. charactername taken taken: " + e);
-				e.printStackTrace();
 				response = new CharacterCreationFailedResponse("Character name already taken.");
 			}
 			else if(e instanceof AccountAlreadyHasACharacterException)

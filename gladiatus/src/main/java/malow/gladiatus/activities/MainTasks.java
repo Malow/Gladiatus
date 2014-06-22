@@ -13,7 +13,8 @@ import malow.gladiatus.R;
 import malow.gladiatus.common.models.ModelInterface;
 import malow.gladiatus.common.models.requests.LoginRequest;
 import malow.gladiatus.common.models.requests.RegisterRequest;
-import malow.gladiatus.common.models.responses.LoginResponse;
+import malow.gladiatus.common.models.responses.LoginFailedResponse;
+import malow.gladiatus.common.models.responses.LoginSuccessfulResponse;
 import malow.gladiatus.common.models.responses.RegisterFailedResponse;
 import malow.malowlib.RequestResponseClient;
 
@@ -28,9 +29,15 @@ public class MainTasks
                 try
                 {
                     loginResponse = NetworkClient.sendAndReceive(loginRequest);
-                    if(loginResponse instanceof LoginResponse)
+                    if(loginResponse instanceof LoginSuccessfulResponse)
                     {
-                        FinishLoginAttempt((LoginResponse) loginResponse);
+                        Globals.sessionId = ((LoginSuccessfulResponse) loginResponse).sessionId;
+                        GoToCharacterInfo();
+                    }
+                    else if(loginResponse instanceof LoginFailedResponse)
+                    {
+                        SetLoginErrorText("Login Failed: " + ((LoginFailedResponse) loginResponse).errorCode);
+                        Log.i(this.getClass().getSimpleName(), "Login Failed: " + ((LoginFailedResponse) loginResponse).errorCode);
                     }
                     else
                     {
@@ -58,12 +65,14 @@ public class MainTasks
                 try
                 {
                     registerResponse = NetworkClient.sendAndReceive(registerRequest);
-                    if(registerResponse instanceof LoginResponse)
+                    if(registerResponse instanceof LoginSuccessfulResponse)
                     {
-                        if(!FinishLoginAttempt((LoginResponse) registerResponse))
-                        {
-                            SwitchToTab(0); // Switch to login screen if register was successful but login failed.
-                        }
+                        Globals.sessionId = ((LoginSuccessfulResponse) registerResponse).sessionId;
+                        GoToCharacterInfo();
+                    }
+                    else if(registerResponse instanceof LoginFailedResponse)
+                    {
+                        SwitchToTab(0); // Switch to login screen if register was successful but login failed.
                     }
                     else if(registerResponse instanceof RegisterFailedResponse)
                     {
@@ -86,24 +95,6 @@ public class MainTasks
                 return null;
             }
         }.execute();
-    }
-
-    public static boolean FinishLoginAttempt(LoginResponse loginResponse)
-    {
-        final String errorCode = loginResponse.errorCode;
-        if(errorCode.isEmpty())
-        {
-            Globals.sessionId = loginResponse.sessionId;
-            Log.i("MainTasks", "Login successful, sessionId: " + Globals.sessionId);
-            GoToCharacterInfo();
-            return true;
-        }
-        else
-        {
-            SetLoginErrorText(errorCode);
-            Log.i("MainTasks", "Login failed, errorCode: " + errorCode);
-            return false;
-        }
     }
 
     public static void GoToCharacterInfo()
