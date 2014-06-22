@@ -2,8 +2,6 @@ package malow.gladiatus.activities;
 
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.Gravity;
@@ -22,11 +20,14 @@ import malow.gladiatus.Globals;
 import malow.gladiatus.NetworkClient;
 import malow.gladiatus.R;
 import malow.gladiatus.common.models.Ability;
+import malow.gladiatus.common.models.Armor;
+import malow.gladiatus.common.models.Initiative;
 import malow.gladiatus.common.models.ModelInterface;
 import malow.gladiatus.common.models.requests.BasicAbilitiesRequest;
 import malow.gladiatus.common.models.requests.CharacterCreateRequest;
 import malow.gladiatus.common.models.responses.BasicAbilitiesResponse;
 import malow.gladiatus.common.models.responses.CharacterCreationSuccessfulResponse;
+import malow.malowlib.RandomNumberGenerator;
 import malow.malowlib.RequestResponseClient;
 
 public class CharacterCreateTasks
@@ -155,6 +156,9 @@ public class CharacterCreateTasks
 
     public static void OpenAbilityPickerPopup(final Ability removeAbility)
     {
+        if(removeAbility.id == 1)
+            return; // Don't let user replace Attack.
+
         new AsyncTask<Void, Void, Void>()
         {
             @Override
@@ -236,5 +240,143 @@ public class CharacterCreateTasks
                 return null;
             }
         }.execute();
+    }
+
+    public static void RandomizeBaseStats()
+    {
+        CharacterCreateActivity.creatingCharacter.baseStats.health = 10 + RandomNumberGenerator.RollD(10);
+        CharacterCreateActivity.creatingCharacter.baseStats.strength = 5 + RandomNumberGenerator.RollD(6);
+        CharacterCreateActivity.creatingCharacter.baseStats.dexterity = 5 + RandomNumberGenerator.RollD(6);
+        CharacterCreateActivity.creatingCharacter.baseStats.intelligence = 5 + RandomNumberGenerator.RollD(6);
+        CharacterCreateActivity.creatingCharacter.baseStats.willpower = 5 + RandomNumberGenerator.RollD(6);
+
+        ((TextView) Globals.characterCreateActivity.findViewById(R.id.character_create_health_base)).setText(Integer.toString((int) CharacterCreateActivity.creatingCharacter.baseStats.health));
+        ((TextView) Globals.characterCreateActivity.findViewById(R.id.character_create_strength_base)).setText(Integer.toString((int) CharacterCreateActivity.creatingCharacter.baseStats.strength));
+        ((TextView) Globals.characterCreateActivity.findViewById(R.id.character_create_dexterity_base)).setText(Integer.toString((int) CharacterCreateActivity.creatingCharacter.baseStats.dexterity));
+        ((TextView) Globals.characterCreateActivity.findViewById(R.id.character_create_intelligence_base)).setText(Integer.toString((int) CharacterCreateActivity.creatingCharacter.baseStats.intelligence));
+        ((TextView) Globals.characterCreateActivity.findViewById(R.id.character_create_willpower_base)).setText(Integer.toString((int) CharacterCreateActivity.creatingCharacter.baseStats.willpower));
+
+        UpdateTotalStats();
+    }
+
+    public static void UpdateTotalStats()
+    {
+        CharacterCreateActivity.creatingCharacter.totalStats.health = CharacterCreateActivity.creatingCharacter.baseStats.health + CharacterCreateActivity.creatingCharacter.extraStats.health;
+        CharacterCreateActivity.creatingCharacter.totalStats.strength = CharacterCreateActivity.creatingCharacter.baseStats.strength + CharacterCreateActivity.creatingCharacter.extraStats.strength;
+        CharacterCreateActivity.creatingCharacter.totalStats.dexterity = CharacterCreateActivity.creatingCharacter.baseStats.dexterity + CharacterCreateActivity.creatingCharacter.extraStats.dexterity;
+        CharacterCreateActivity.creatingCharacter.totalStats.intelligence = CharacterCreateActivity.creatingCharacter.baseStats.intelligence + CharacterCreateActivity.creatingCharacter.extraStats.intelligence;
+        CharacterCreateActivity.creatingCharacter.totalStats.willpower = CharacterCreateActivity.creatingCharacter.baseStats.willpower + CharacterCreateActivity.creatingCharacter.extraStats.willpower;
+
+        ((TextView) Globals.characterCreateActivity.findViewById(R.id.character_create_health_total)).setText(Integer.toString((int) CharacterCreateActivity.creatingCharacter.totalStats.health));
+        ((TextView) Globals.characterCreateActivity.findViewById(R.id.character_create_strength_total)).setText(Integer.toString((int) CharacterCreateActivity.creatingCharacter.totalStats.strength));
+        ((TextView) Globals.characterCreateActivity.findViewById(R.id.character_create_dexterity_total)).setText(Integer.toString((int) CharacterCreateActivity.creatingCharacter.totalStats.dexterity));
+        ((TextView) Globals.characterCreateActivity.findViewById(R.id.character_create_intelligence_total)).setText(Integer.toString((int) CharacterCreateActivity.creatingCharacter.totalStats.intelligence));
+        ((TextView) Globals.characterCreateActivity.findViewById(R.id.character_create_willpower_total)).setText(Integer.toString((int) CharacterCreateActivity.creatingCharacter.totalStats.willpower));
+
+        float armor = Armor.GetArmor(CharacterCreateActivity.creatingCharacter.totalStats.dexterity);
+        float initiative = Initiative.GetInitiative(CharacterCreateActivity.creatingCharacter.totalStats.dexterity);
+        ((TextView) Globals.characterCreateActivity.findViewById(R.id.character_create_armor)).setText(Integer.toString((int) armor));
+        ((TextView) Globals.characterCreateActivity.findViewById(R.id.character_create_initiative)).setText(Integer.toString((int) initiative));
+    }
+
+    public static void ChangeExtraStats(boolean plus, String stat)
+    {
+        if(plus && CharacterCreateActivity.creatingCharacter.statPointsLeft == 0)
+            return;// Dont have the points for it.
+
+
+        if(stat.equals("health"))
+        {
+            if(plus)
+            {
+                CharacterCreateActivity.creatingCharacter.extraStats.health += 2.0f;
+                CharacterCreateActivity.creatingCharacter.statPointsLeft--;
+            }
+            else
+            {
+                if(CharacterCreateActivity.creatingCharacter.extraStats.health > 0.0f)
+                {
+                    CharacterCreateActivity.creatingCharacter.extraStats.health -= 2.0f;
+                    CharacterCreateActivity.creatingCharacter.statPointsLeft++;
+                }
+            }
+        }
+
+        if(stat.equals("strength"))
+        {
+            if(plus)
+            {
+                CharacterCreateActivity.creatingCharacter.extraStats.strength += 1.0f;
+                CharacterCreateActivity.creatingCharacter.statPointsLeft--;
+            }
+            else
+            {
+                if(CharacterCreateActivity.creatingCharacter.extraStats.strength > 0.0f)
+                {
+                    CharacterCreateActivity.creatingCharacter.extraStats.strength -= 1.0f;
+                    CharacterCreateActivity.creatingCharacter.statPointsLeft++;
+                }
+            }
+        }
+
+        if(stat.equals("dexterity"))
+        {
+            if(plus)
+            {
+                CharacterCreateActivity.creatingCharacter.extraStats.dexterity += 1.0f;
+                CharacterCreateActivity.creatingCharacter.statPointsLeft--;
+            }
+            else
+            {
+                if(CharacterCreateActivity.creatingCharacter.extraStats.dexterity > 0.0f)
+                {
+                    CharacterCreateActivity.creatingCharacter.extraStats.dexterity -= 1.0f;
+                    CharacterCreateActivity.creatingCharacter.statPointsLeft++;
+                }
+            }
+        }
+
+        if(stat.equals("intelligence"))
+        {
+            if(plus)
+            {
+                CharacterCreateActivity.creatingCharacter.extraStats.intelligence += 1.0f;
+                CharacterCreateActivity.creatingCharacter.statPointsLeft--;
+            }
+            else
+            {
+                if(CharacterCreateActivity.creatingCharacter.extraStats.intelligence > 0.0f)
+                {
+                    CharacterCreateActivity.creatingCharacter.extraStats.intelligence -= 1.0f;
+                    CharacterCreateActivity.creatingCharacter.statPointsLeft++;
+                }
+            }
+        }
+
+        if(stat.equals("willpower"))
+        {
+            if(plus)
+            {
+                CharacterCreateActivity.creatingCharacter.extraStats.willpower += 1.0f;
+                CharacterCreateActivity.creatingCharacter.statPointsLeft--;
+            }
+            else
+            {
+                if(CharacterCreateActivity.creatingCharacter.extraStats.willpower > 0.0f)
+                {
+                    CharacterCreateActivity.creatingCharacter.extraStats.willpower -= 1.0f;
+                    CharacterCreateActivity.creatingCharacter.statPointsLeft++;
+                }
+            }
+        }
+
+        UpdateTotalStats();
+
+        ((TextView) Globals.characterCreateActivity.findViewById(R.id.character_create_health_extra)).setText(Integer.toString((int) CharacterCreateActivity.creatingCharacter.extraStats.health));
+        ((TextView) Globals.characterCreateActivity.findViewById(R.id.character_create_strength_extra)).setText(Integer.toString((int) CharacterCreateActivity.creatingCharacter.extraStats.strength));
+        ((TextView) Globals.characterCreateActivity.findViewById(R.id.character_create_dexterity_extra)).setText(Integer.toString((int) CharacterCreateActivity.creatingCharacter.extraStats.dexterity));
+        ((TextView) Globals.characterCreateActivity.findViewById(R.id.character_create_intelligence_extra)).setText(Integer.toString((int) CharacterCreateActivity.creatingCharacter.extraStats.intelligence));
+        ((TextView) Globals.characterCreateActivity.findViewById(R.id.character_create_willpower_extra)).setText(Integer.toString((int) CharacterCreateActivity.creatingCharacter.extraStats.willpower));
+        ((TextView) Globals.characterCreateActivity.findViewById(R.id.character_create_points_left)).setText(Integer.toString(CharacterCreateActivity.creatingCharacter.statPointsLeft));
     }
 }

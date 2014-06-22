@@ -1,5 +1,6 @@
 package malow.gladiatus.activities;
 
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -68,6 +69,40 @@ public class CharacterCreateOnClick
         public void onClick(View v)
         {
             CharacterCreateTasks.OpenAbilityPickerPopup(this.removeAbility);
+        }
+    }
+
+    public static RandomizeBaseStats randomizeBaseStats()
+    {
+        return self.new RandomizeBaseStats();
+    }
+    public class RandomizeBaseStats implements  View.OnClickListener
+    {
+        @Override
+        public void onClick(View v)
+        {
+            CharacterCreateTasks.RandomizeBaseStats();
+        }
+    }
+
+    public static ChangeExtraStats changeExtraStats(boolean plus, String stat)
+    {
+        return self.new ChangeExtraStats(plus, stat);
+    }
+    public class ChangeExtraStats implements  View.OnClickListener
+    {
+        public boolean plus;
+        public String stat;
+
+        public ChangeExtraStats(boolean plus, String stat)
+        {
+            this.plus = plus;
+            this.stat = stat;
+        }
+        @Override
+        public void onClick(View v)
+        {
+            CharacterCreateTasks.ChangeExtraStats(this.plus, this.stat);
         }
     }
 }

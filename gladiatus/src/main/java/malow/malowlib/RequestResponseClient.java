@@ -17,7 +17,7 @@ public class RequestResponseClient extends Process
 
     public static class ConnectionBrokenException extends Exception
     {
-
+		private static final long serialVersionUID = 1L;
     }
 
     public String sendAndReceive(String msg) throws ConnectionBrokenException

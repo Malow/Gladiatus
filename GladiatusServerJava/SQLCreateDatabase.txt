@@ -18,10 +18,10 @@ CREATE TABLE Characters (id INT NOT NULL AUTO_INCREMENT,
     character_name VARCHAR(40) NOT NULL UNIQUE,
     character_image VARCHAR(40) NOT NULL,
     health FLOAT NOT NULL,
-    armor FLOAT NOT NULL,
     strength FLOAT NOT NULL,
-    dexterity FLOAT NOT NULL,
-    initiative FLOAT NOT NULL,    
+    dexterity FLOAT NOT NULL, 
+    intelligence FLOAT NOT NULL, 
+    willpower FLOAT NOT NULL, 
     PRIMARY KEY (ID),
     FOREIGN KEY (account_id) REFERENCES Accounts(id));
 

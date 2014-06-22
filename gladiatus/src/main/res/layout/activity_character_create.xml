@@ -116,7 +116,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="8"
+                    android:text="10"
                     android:id="@+id/character_create_points_left"
                     android:gravity="center"
                     android:textSize="18sp"
@@ -211,7 +211,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:text="15"
+                            android:text="0"
                             android:id="@+id/character_create_health_extra"
                             android:gravity="center"
                             android:textSize="18sp"
@@ -273,7 +273,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:text="15"
+                            android:text="0"
                             android:id="@+id/character_create_strength_extra"
                             android:gravity="center"
                             android:textSize="18sp"
@@ -335,7 +335,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:text="15"
+                            android:text="0"
                             android:id="@+id/character_create_dexterity_extra"
                             android:gravity="center"
                             android:textSize="18sp"
@@ -397,7 +397,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:text="15"
+                            android:text="0"
                             android:id="@+id/character_create_intelligence_extra"
                             android:gravity="center"
                             android:textSize="18sp"
@@ -459,7 +459,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:text="15"
+                            android:text="0"
                             android:id="@+id/character_create_willpower_extra"
                             android:gravity="center"
                             android:textSize="18sp"
@@ -540,7 +540,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Randomize Base"
-                android:id="@+id/button2"
+                android:id="@+id/character_create_randomize_button"
                 android:textSize="14dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="-20dp"
@@ -573,26 +573,6 @@
                     android:gravity="right"
                     android:textSize="20sp"
                     />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="2"
-                    android:id="@+id/character_create_skills_left"
-                    android:gravity="center"
-                    android:textSize="20sp"
-                    android:layout_marginLeft="5dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="@string/left_label"
-                    android:id="@+id/textView23"
-                    android:gravity="center"
-                    android:textSize="18sp"
-                    android:layout_marginLeft="5dp"/>
 
             </LinearLayout>
 
