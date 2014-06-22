@@ -2,15 +2,19 @@ package malow.gladiatus.activities;
 
 
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -26,18 +30,24 @@ import malow.gladiatus.common.models.ModelInterface;
 import malow.gladiatus.common.models.requests.BasicAbilitiesRequest;
 import malow.gladiatus.common.models.requests.CharacterCreateRequest;
 import malow.gladiatus.common.models.responses.BasicAbilitiesResponse;
+import malow.gladiatus.common.models.responses.CharacterCreationFailedResponse;
 import malow.gladiatus.common.models.responses.CharacterCreationSuccessfulResponse;
 import malow.malowlib.RandomNumberGenerator;
 import malow.malowlib.RequestResponseClient;
 
 public class CharacterCreateTasks
 {
-    public static void CreateCharacter(final CharacterCreateRequest request)
+    public static void CreateCharacter()
     {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... voids)
             {
+
+                String characterName = ((EditText) Globals.characterCreateActivity.findViewById(R.id.create_nameField)).getText().toString();
+                CreatingCharacter g = CharacterCreateActivity.creatingCharacter;
+                CharacterCreateRequest request = new CharacterCreateRequest(characterName, g.image, g.totalStats, g.abilities, Globals.sessionId);
+
                 ModelInterface response = null;
                 try
                 {
@@ -46,19 +56,22 @@ public class CharacterCreateTasks
                     {
                         GoToCharacterInfo();
                     }
-                    /*else if()
+                    else if(response instanceof CharacterCreationFailedResponse)
                     {
-                        // Edit error text to say something like "Char name taken"
-                    }*/
+                        Log.i(this.getClass().getSimpleName(), "CharacterCreation failed: " + ((CharacterCreationFailedResponse) response).errorCode);
+                        SetCharacterCreateErrorText("Character Creation failed: " + ((CharacterCreationFailedResponse) response).errorCode);
+                    }
                     else
                     {
                         Log.i(this.getClass().getSimpleName(), "CharacterCreation failed, unexpected response: " + response);
+                        SetCharacterCreateErrorText("Character Creation failed, unexpected response: " + response);
                     }
 
                 }
                 catch (RequestResponseClient.ConnectionBrokenException e)
                 {
                     Log.i(this.getClass().getSimpleName(), "CharacterCreationRequest failed, couldn't connect to server:");
+                    SetCharacterCreateErrorText("Character Creation failed, couldn't connect to server.");
                 }
                 return null;
             }
@@ -199,7 +212,7 @@ public class CharacterCreateTasks
                         CharacterCreateActivity.creatingCharacter.abilities.remove(removeAbility);
 
                         LayoutInflater layoutInflater = (LayoutInflater)Globals.characterCreateActivity.getBaseContext().getSystemService(Globals.characterCreateActivity.LAYOUT_INFLATER_SERVICE);
-                        View popupView = layoutInflater.inflate(R.layout.ability_list, null);
+                        View popupView = layoutInflater.inflate(R.layout.popup_frame, null);
                         final PopupWindow popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
                         popupWindow.showAtLocation(Globals.characterCreateActivity.findViewById(R.id.scrollView), Gravity.CENTER, 0, 0);
@@ -208,7 +221,7 @@ public class CharacterCreateTasks
 
 
                         LayoutInflater inflater = Globals.characterCreateActivity.getLayoutInflater();
-                        LinearLayout abilitiesList = (LinearLayout) popupView.findViewById(R.id.ability_list_layout);
+                        LinearLayout abilitiesList = (LinearLayout) popupView.findViewById(R.id.popup_frame_layout);
                         abilitiesList.removeAllViews();
                         List<Ability> availableAbilities = abilities;
 
@@ -378,5 +391,120 @@ public class CharacterCreateTasks
         ((TextView) Globals.characterCreateActivity.findViewById(R.id.character_create_intelligence_extra)).setText(Integer.toString((int) CharacterCreateActivity.creatingCharacter.extraStats.intelligence));
         ((TextView) Globals.characterCreateActivity.findViewById(R.id.character_create_willpower_extra)).setText(Integer.toString((int) CharacterCreateActivity.creatingCharacter.extraStats.willpower));
         ((TextView) Globals.characterCreateActivity.findViewById(R.id.character_create_points_left)).setText(Integer.toString(CharacterCreateActivity.creatingCharacter.statPointsLeft));
+    }
+
+    public static void OpenStatInfoPopup(String stat)
+    {
+        String header = "";
+        String infoText = "";
+        if(stat.equals("health"))
+        {
+            header = "Health";
+            infoText = "Health allows you to take more damage before being defeated. It is a cheaper stat than the others.";
+        }
+        if(stat.equals("strength"))
+        {
+            header = "Strength";
+            infoText = "Strength makes you deal more damage with physical attacks. It also lets you carry more weight, making you able to use heavier armor and weapons.";
+        }
+        if(stat.equals("dexterity"))
+        {
+            header = "Dexterity";
+            infoText = "Dexterity increases your chance to hit with physical weapons. It also increases your armor slightly by giving you a higher chance to evade attacks. It also increases your Movement speed and Initiative slightly.";
+        }
+        if(stat.equals("intelligence"))
+        {
+            header = "Intelligence";
+            infoText = "Intelligence increases your chance to hit with spells and staff attacks. It also increases the effectiveness of some abilities.";
+        }
+        if(stat.equals("willpower"))
+        {
+            header = "Willpower";
+            infoText = "Willpower increases the effect of your spells and reduces the effect of enemy spells on you.";
+        }
+        if(stat.equals("armor"))
+        {
+            header = "Armor";
+            infoText = "Armor increases your chance to avoid physical attacks. It consists both of evasion gained from for example Dexterity, and straight up armor gained from for example gear.";
+        }
+        if(stat.equals("initiative"))
+        {
+            header = "Initiative";
+            infoText = "Initiative determines if you or your opponent goes first in a combat round. Initiative depends on weapon used, you Dexterity and your weight among other things.";
+        }
+
+        final String statName = header;
+        final String statDescription = infoText;
+
+        Globals.characterCreateActivity.runOnUiThread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                LayoutInflater layoutInflater = (LayoutInflater)Globals.characterCreateActivity.getBaseContext().getSystemService(Globals.characterCreateActivity.LAYOUT_INFLATER_SERVICE);
+                View popupView = layoutInflater.inflate(R.layout.popup_frame, null);
+                final PopupWindow popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                popupWindow.setBackgroundDrawable (new BitmapDrawable());
+                popupWindow.setOutsideTouchable(true);
+                popupWindow.setTouchInterceptor(new View.OnTouchListener()
+                {
+                    public boolean onTouch(View v, MotionEvent event)
+                    {
+                        if (event.getAction() == MotionEvent.ACTION_DOWN)
+                        {
+                            popupWindow.dismiss();
+                            return true;
+                        }
+                        return false;
+                    }
+                });
+
+                popupWindow.showAtLocation(Globals.characterCreateActivity.findViewById(R.id.scrollView), Gravity.CENTER, 0, 0);
+                popupWindow.setFocusable(true);
+                popupWindow.update();
+
+                LayoutInflater inflater = Globals.characterCreateActivity.getLayoutInflater();
+                LinearLayout layout = (LinearLayout) popupView.findViewById(R.id.popup_frame_layout);
+                layout.removeAllViews();
+
+
+                View abilityView = inflater.inflate(R.layout.stat_info, null);
+                ((TextView) abilityView.findViewById(R.id.stat_name)).setText(statName);
+                ((TextView) abilityView.findViewById(R.id.stat_description)).setText(statDescription);
+
+                abilityView.setOnClickListener(new ImageButton.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        popupWindow.dismiss();
+                    }
+                });
+
+                layout.addView(abilityView);
+            }
+        });
+    }
+
+    public static void SetCharacterCreateErrorText(final String errorCode)
+    {
+        Globals.characterCreateActivity.runOnUiThread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                TextView errorText = (TextView) Globals.characterCreateActivity.findViewById(R.id.character_creation_error_text);
+                errorText.setText(errorCode);
+            }
+        });
+
+        // scroll to bottom to see the text.
+        final ScrollView scrollview = ((ScrollView) Globals.characterCreateActivity.findViewById(R.id.scrollView));
+        scrollview.post(new Runnable() {
+            @Override
+            public void run() {
+                scrollview.fullScroll(ScrollView.FOCUS_DOWN);
+            }
+        });
     }
 }

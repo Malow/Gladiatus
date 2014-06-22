@@ -85,7 +85,7 @@
             android:id="@+id/loginErrorText"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:textColor="#ffa40912"/>
+            android:textColor="@color/GladiatusErrorTextColor"/>
 
     </LinearLayout>
 

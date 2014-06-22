@@ -1,9 +1,12 @@
-package malow.gladiatus.common.models;
+package malow.gladiatus.activities;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Gladiator
+import malow.gladiatus.common.models.Ability;
+import malow.gladiatus.common.models.Stats;
+
+public class CreatingCharacter
 {
     public String name = "";
     public String image = "0";
@@ -15,7 +18,7 @@ public class Gladiator
 
     public int statPointsLeft = 10;
 
-    public Gladiator()
+    public CreatingCharacter()
     {
 
     }

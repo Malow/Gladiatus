@@ -1,0 +1,32 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/GladiatusColor6">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Stat"
+                android:id="@+id/stat_name"
+                android:layout_marginLeft="5dp"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Description of the stat"
+                android:id="@+id/stat_description"
+                android:layout_marginLeft="5dp"/>
+
+        </LinearLayout>
+
+</LinearLayout>

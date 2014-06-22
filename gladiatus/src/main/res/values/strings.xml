@@ -34,6 +34,10 @@
     <string name="dexterity_label">Dexterity:</string>
     <string name="intelligence_label">Intelligence:</string>
     <string name="willpower_label">Willpower:</string>
+    <string name="randomize_button">Reroll Base</string>
+
+
+    <string name="stat_info_text">Click on each stat for info</string>
 
 
     <string name="create_character_button">Create Character</string>

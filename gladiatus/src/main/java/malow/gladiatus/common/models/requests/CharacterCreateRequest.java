@@ -5,35 +5,33 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
+import malow.gladiatus.common.models.Ability;
 import malow.gladiatus.common.models.ModelInterface;
+import malow.gladiatus.common.models.Stats;
 
 public class CharacterCreateRequest implements ModelInterface
 {
     public final String characterName;
     public final String characterImage;
-    public final String health;
-    public final String armor;
-    public final String strength;
-    public final String dexterity;
-    public final String initiative;
+    public final Stats stats;
+    public final List<Ability> abilities;
+    public final String sessionId;
 
     @JsonCreator
     public CharacterCreateRequest(@JsonProperty("characterName") String characterName,
                                  @JsonProperty("characterImage") String characterImage,
-                                 @JsonProperty("health") String health,
-                                 @JsonProperty("armor") String armor,
-                                 @JsonProperty("strength") String strength,
-                                 @JsonProperty("dexterity") String dexterity,
-                                 @JsonProperty("initiative") String initiative)
+                                 @JsonProperty("stats") Stats stats,
+                                 @JsonProperty("abilities") List<Ability> abilities,
+                                 @JsonProperty("sessionId") String sessionId)
     {
         this.characterName = characterName;
         this.characterImage = characterImage;
-        this.health = health;
-        this.armor = armor;
-        this.strength = strength;
-        this.dexterity = dexterity;
-        this.initiative = initiative;
+        this.stats = stats;
+        this.abilities = abilities;
+        this.sessionId = sessionId;
     }
 
     @Override

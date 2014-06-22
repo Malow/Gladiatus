@@ -4,7 +4,7 @@
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/ability_list">
+                android:id="@+id/popup_frame">
 
     <LinearLayout
         android:orientation="vertical"
@@ -24,7 +24,7 @@
                 android:layout_margin="5dp"
                 android:background="@color/GladiatusColor6"
                 android:padding="5dp"
-                android:id="@+id/ability_list_layout">
+                android:id="@+id/popup_frame_layout">
 
             </LinearLayout>
         </ScrollView>

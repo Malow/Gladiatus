@@ -4,12 +4,17 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import malow.gladiatus.common.models.Ability;
+import malow.gladiatus.common.models.ModelInterface;
+import malow.gladiatus.common.models.requests.CharacterCreateRequest;
 import malow.gladiatus.common.models.responses.BasicAbilitiesResponse;
+import malow.gladiatus.common.models.responses.CharacterCreationFailedResponse;
+import malow.gladiatus.common.models.responses.CharacterCreationSuccessfulResponse;
 import malow.gladiatus.common.models.responses.CharacterInfoResponse;
 
 public class SQLConnector 
@@ -32,6 +37,16 @@ public class SQLConnector
 	public static class UsernameTakenException extends Exception
 	{
 		private static final long serialVersionUID = 4L;
+	}
+	
+	public static class CharacternameTakenException extends Exception
+	{
+		private static final long serialVersionUID = 5L;
+	}
+	
+	public static class AccountAlreadyHasACharacterException extends Exception
+	{
+		private static final long serialVersionUID = 6L;
 	}
 	  
 	public static String authenticateAccount(String username, String password) throws Exception
@@ -80,46 +95,30 @@ public class SQLConnector
 		Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/Gladiatus?" + "user=GladiatusServer&password=qqiuIUr348EW");
 		CharacterInfoResponse response = null;
 		
-		PreparedStatement accountStatement = connect.prepareStatement("SELECT * FROM Accounts WHERE session_id = ? ; ");
-		accountStatement.setString(1, sessionId);
-		ResultSet accountResult = accountStatement.executeQuery();
+		int accountId = getAccountId(sessionId);
 		
-		if (accountResult.next()) 
+		PreparedStatement characterStatement = connect.prepareStatement("SELECT * FROM Characters WHERE account_id = ? ; ");
+		characterStatement.setInt(1, accountId);
+		ResultSet characterResult = characterStatement.executeQuery();
+		
+		if(characterResult.next())
 		{
-			int accountId = accountResult.getInt("id");
-			PreparedStatement characterStatement = connect.prepareStatement("SELECT * FROM Characters WHERE account_id = ? ; ");
-			characterStatement.setInt(1, accountId);
-			ResultSet characterResult = characterStatement.executeQuery();
+			String characterName = characterResult.getString("character_name");
+			String characterImage = characterResult.getString("character_image");
+			String health = Float.toString(characterResult.getFloat("health"));
+			String strength = Float.toString(characterResult.getFloat("strength"));
+			String dexterity = Float.toString(characterResult.getFloat("dexterity"));
 			
-			
-			if(characterResult.next())
-			{
-				String characterName = characterResult.getString("character_name");
-				String characterImage = characterResult.getString("character_image");
-				String health = Float.toString(characterResult.getFloat("health"));
-				String armor = Float.toString(characterResult.getFloat("armor"));
-				String strength = Float.toString(characterResult.getFloat("strength"));
-				String dexterity = Float.toString(characterResult.getFloat("dexterity"));
-				String initiative = Float.toString(characterResult.getFloat("initiative"));
-				
-				response = new CharacterInfoResponse(characterName, characterImage, health, armor, strength, dexterity, initiative);
-			}
-			else
-			{
-				throw new NoCharacterFoundException();
-			}
-			
-			accountStatement.close();
-			characterResult.close();
+			response = new CharacterInfoResponse(characterName, characterImage, health, "0", strength, dexterity, "0");
 		}
 		else
-		{ 
-			throw new SessionExpiredException();
-		}		
+		{
+			throw new NoCharacterFoundException();
+		}
 		
-		accountStatement.close();
+		characterStatement.close();
+		characterResult.close();
 		connect.close();
-		accountResult.close();
 		
 		return response;
 	}
@@ -127,6 +126,7 @@ public class SQLConnector
 	public static String registerAccount(String username, String password, String email) throws Exception
 	{
 		String ret = null;
+		Class.forName("com.mysql.jdbc.Driver");
 		Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/Gladiatus?" + "user=GladiatusServer&password=qqiuIUr348EW");
 
 		PreparedStatement accountStatement = connect.prepareStatement("SELECT * FROM Accounts WHERE username = ? ; ");
@@ -189,5 +189,123 @@ public class SQLConnector
 		}
 		
 		return new BasicAbilitiesResponse(abilities);
+	}
+
+	public static ModelInterface createCharacter(CharacterCreateRequest request) throws Exception 
+	{
+		Class.forName("com.mysql.jdbc.Driver");
+		Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/Gladiatus?" + "user=GladiatusServer&password=qqiuIUr348EW");
+
+		if(characterExists(request.characterName))
+		{
+			throw new CharacternameTakenException();
+		}		
+		
+		int accountId = getAccountId(request.sessionId);
+		
+		if(accountHasCharacter(accountId))
+		{
+			throw new AccountAlreadyHasACharacterException();
+		}
+				
+		PreparedStatement newCharacterStatement = connect.prepareStatement("insert into Gladiatus.Characters values (default, ?, ?, ?, ?, ?, ?, ?, ?);");
+		newCharacterStatement.setInt(1, accountId);
+		newCharacterStatement.setString(2, request.characterName);
+		newCharacterStatement.setString(3, request.characterImage);
+		newCharacterStatement.setFloat(4, request.stats.health);
+		newCharacterStatement.setFloat(5, request.stats.strength);
+		newCharacterStatement.setFloat(6, request.stats.dexterity);
+		newCharacterStatement.setFloat(7, request.stats.intelligence);
+		newCharacterStatement.setFloat(8, request.stats.willpower);
+		int rowCount = newCharacterStatement.executeUpdate();
+		newCharacterStatement.close();
+		
+		if(rowCount != 1)
+		{
+			throw new Exception();
+		}
+		
+		connect.close();
+		return new CharacterCreationSuccessfulResponse();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	public static boolean characterExists(String characterName) throws Exception
+	{
+		Class.forName("com.mysql.jdbc.Driver");
+		Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/Gladiatus?" + "user=GladiatusServer&password=qqiuIUr348EW");
+
+		PreparedStatement accountStatement = connect.prepareStatement("SELECT * FROM Characters WHERE character_name = ? ; ");
+		accountStatement.setString(1, characterName);
+		ResultSet accountResult = accountStatement.executeQuery();
+		
+		boolean ret = false;
+		
+		if (accountResult.next())
+		{
+			ret = true;
+		}
+		
+		accountStatement.close();
+		accountResult.close();
+		connect.close();
+		
+		return ret;
+	}
+	
+	public static int getAccountId(String sessionId) throws Exception
+	{
+		Class.forName("com.mysql.jdbc.Driver");
+		Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/Gladiatus?" + "user=GladiatusServer&password=qqiuIUr348EW");
+		
+		PreparedStatement accountStatement = connect.prepareStatement("SELECT * FROM Accounts WHERE session_id = ? ; ");
+		accountStatement.setString(1, sessionId);
+		ResultSet accountResult = accountStatement.executeQuery();
+		
+		int accountId = -1;
+		
+		if (accountResult.next()) 
+		{
+			accountId = accountResult.getInt("id");
+		}
+		else
+		{ 
+			throw new SessionExpiredException();
+		}		
+		
+		accountStatement.close();
+		connect.close();
+		accountResult.close();
+		
+		return accountId;
+	}
+	
+	public static boolean accountHasCharacter(int accountId) throws Exception
+	{
+		Class.forName("com.mysql.jdbc.Driver");
+		Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/Gladiatus?" + "user=GladiatusServer&password=qqiuIUr348EW");
+		
+		PreparedStatement characterStatement = connect.prepareStatement("SELECT * FROM Characters WHERE account_id = ? ; ");
+		characterStatement.setInt(1, accountId);
+		ResultSet characterResult = characterStatement.executeQuery();
+		
+		boolean ret = false;
+		
+		if(characterResult.next())
+		{
+			ret = true;
+		}
+		
+		characterStatement.close();
+		characterResult.close();
+		connect.close();
+		
+		return ret;
 	}
 } 

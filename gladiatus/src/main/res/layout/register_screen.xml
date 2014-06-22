@@ -111,7 +111,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:id="@+id/registerErrorText"
             android:layout_gravity="center_horizontal"
-            android:textColor="#ffa40912"/>
+            android:textColor="@color/GladiatusErrorTextColor"/>
 
     </LinearLayout>
 

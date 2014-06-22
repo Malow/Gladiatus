@@ -2,8 +2,6 @@ package com.malow.gladiatusserver;
 
 import java.util.Scanner;
 
-import malow.malowlib.RandomNumberGenerator;
-
 public class GladiatusServer 
 {
 	public static void main(String [] args)

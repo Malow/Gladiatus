@@ -8,6 +8,8 @@
         android:label="@string/app_name"
         android:theme="@style/GladiatusTheme" >
         <activity
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"
             android:name=".activities.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
@@ -17,10 +19,14 @@
             </intent-filter>
         </activity>
         <activity
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"
             android:name=".activities.CharacterInfoActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"
             android:name=".activities.CharacterCreateActivity"
             android:label="@string/app_name" >
         </activity>

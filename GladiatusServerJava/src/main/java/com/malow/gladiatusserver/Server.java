@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import malow.gladiatus.common.models.requests.BasicAbilitiesRequest;
+import malow.gladiatus.common.models.requests.CharacterCreateRequest;
 import malow.gladiatus.common.models.requests.CharacterInfoRequest;
 import malow.gladiatus.common.models.requests.LoginRequest;
 import malow.gladiatus.common.models.requests.RegisterRequest;
+import malow.gladiatus.common.models.responses.UnexpectedRequestResponse;
 import malow.gladiatus.common.models.*;
 
 import malow.malowlib.NetworkChannel;
@@ -80,9 +82,14 @@ public class Server extends Process
 				{
 					RequestHandler.handleBasicAbilitiesRequest((BasicAbilitiesRequest) request, sender);
 				}
+				else if(request instanceof CharacterCreateRequest)
+				{
+					RequestHandler.handleCharacterCreateRequest((CharacterCreateRequest) request, sender);
+				}
 				else
 				{
 					System.out.println("Unexpected Request from client " + (sender.GetChannelID() + 1) + ": " + request);
+					sender.SendData(new UnexpectedRequestResponse().toNetworkString());
 				}
 			}
 		}

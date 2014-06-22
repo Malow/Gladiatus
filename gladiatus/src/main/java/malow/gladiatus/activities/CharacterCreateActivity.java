@@ -1,24 +1,21 @@
 package malow.gladiatus.activities;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
-
-import java.util.ArrayList;
+import android.widget.TextView;
 
 import malow.gladiatus.Globals;
 import malow.gladiatus.R;
 import malow.gladiatus.common.models.Ability;
-import malow.gladiatus.common.models.Gladiator;
 
 public class CharacterCreateActivity extends Activity
 {
-    public static Gladiator creatingCharacter = new Gladiator();
+    public static CreatingCharacter creatingCharacter = new CreatingCharacter();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -26,6 +23,9 @@ public class CharacterCreateActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character_create);
         Globals.characterCreateActivity = this;
+
+        Button createCharacterButton = (Button) findViewById(R.id.create_character_button);
+        createCharacterButton.setOnClickListener(CharacterCreateOnClick.createCharacter());
 
         ImageButton imagePickButton = (ImageButton) findViewById(R.id.create_character_pick_image);
         imagePickButton.setOnClickListener(CharacterCreateOnClick.openImagePickerPopup());
@@ -63,6 +63,27 @@ public class CharacterCreateActivity extends Activity
         plusWillpowerButton.setOnClickListener(CharacterCreateOnClick.changeExtraStats(true, "willpower"));
         Button minusWillpowerButton = (Button) findViewById(R.id.character_create_willpower_minus_button);
         minusWillpowerButton.setOnClickListener(CharacterCreateOnClick.changeExtraStats(false, "willpower"));
+
+        TextView healthLabel = (TextView) findViewById(R.id.character_create_health_label);
+        healthLabel.setOnClickListener(CharacterCreateOnClick.openStatInfoPopup("health"));
+
+        TextView strengthLabel = (TextView) findViewById(R.id.character_create_strength_label);
+        strengthLabel.setOnClickListener(CharacterCreateOnClick.openStatInfoPopup("strength"));
+
+        TextView dexterityLabel = (TextView) findViewById(R.id.character_create_dexterity_label);
+        dexterityLabel.setOnClickListener(CharacterCreateOnClick.openStatInfoPopup("dexterity"));
+
+        TextView intelligenceLabel = (TextView) findViewById(R.id.character_create_intelligence_label);
+        intelligenceLabel.setOnClickListener(CharacterCreateOnClick.openStatInfoPopup("intelligence"));
+
+        TextView willpowerLabel = (TextView) findViewById(R.id.character_create_willpower_label);
+        willpowerLabel.setOnClickListener(CharacterCreateOnClick.openStatInfoPopup("willpower"));
+
+        TextView armorLabel = (TextView) findViewById(R.id.character_create_armor_label);
+        armorLabel.setOnClickListener(CharacterCreateOnClick.openStatInfoPopup("armor"));
+
+        TextView initiativeLabel = (TextView) findViewById(R.id.character_create_initiative_label);
+        initiativeLabel.setOnClickListener(CharacterCreateOnClick.openStatInfoPopup("initiative"));
     }
 
     @Override

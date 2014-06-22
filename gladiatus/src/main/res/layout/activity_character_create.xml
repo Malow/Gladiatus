@@ -182,7 +182,7 @@
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceLarge"
                             android:text="@string/health_label"
-                            android:id="@+id/textView10"
+                            android:id="@+id/character_create_health_label"
                             android:gravity="right"
                             android:textSize="18sp"
                             />
@@ -247,7 +247,7 @@
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceLarge"
                             android:text="@string/strength_label"
-                            android:id="@+id/textView11"
+                            android:id="@+id/character_create_strength_label"
                             android:gravity="right"
                             android:textSize="18sp"
                             />
@@ -309,7 +309,7 @@
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceLarge"
                             android:text="@string/dexterity_label"
-                            android:id="@+id/textView12"
+                            android:id="@+id/character_create_dexterity_label"
                             android:gravity="right"
                             android:textSize="18sp"
                             />
@@ -371,7 +371,7 @@
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceLarge"
                             android:text="@string/intelligence_label"
-                            android:id="@+id/textView13"
+                            android:id="@+id/character_create_intelligence_label"
                             android:gravity="right"
                             android:textSize="18sp"
                             />
@@ -433,7 +433,7 @@
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceLarge"
                             android:text="@string/willpower_label"
-                            android:id="@+id/textView15"
+                            android:id="@+id/character_create_willpower_label"
                             android:gravity="right"
                             android:textSize="18sp"
                             />
@@ -459,7 +459,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:text="0"
                             android:id="@+id/character_create_willpower_extra"
                             android:gravity="center"
                             android:textSize="18sp"
@@ -494,7 +493,7 @@
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceLarge"
                             android:text="@string/armor_label"
-                            android:id="@+id/textView20"
+                            android:id="@+id/character_create_armor_label"
                             android:gravity="right"
                             android:textSize="18sp"
                             />
@@ -517,7 +516,7 @@
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceLarge"
                             android:text="@string/initiative_label"
-                            android:id="@+id/textView21"
+                            android:id="@+id/character_create_initiative_label"
                             android:gravity="right"
                             android:textSize="18sp"
                             android:layout_marginTop="5dp"/>
@@ -536,15 +535,32 @@
 
             </LinearLayout>
 
-            <Button
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Randomize Base"
-                android:id="@+id/character_create_randomize_button"
-                android:textSize="14dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="-20dp"
-                android:minHeight="0dp"/>
+                >
+
+                <TextView
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="@string/stat_info_text"
+                    android:id="@+id/textView"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/randomize_button"
+                    android:id="@+id/character_create_randomize_button"
+                    android:textSize="14dp"
+                    android:layout_gravity="center"
+                    android:minHeight="0dp"
+                    android:layout_marginTop="-5dp"/>
+            </LinearLayout>
 
             <View
                 android:layout_width="fill_parent"
@@ -552,7 +568,7 @@
                 android:background="@color/GladiatusColor10"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginBottom="2dp">
             </View>
 
@@ -562,7 +578,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="10dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -595,6 +611,19 @@
                 android:textSize="20sp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"/>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/character_creation_error_text"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/GladiatusErrorTextColor"
+                android:gravity="center"
+                android:phoneNumber="true"/>
 
         </LinearLayout>
 
