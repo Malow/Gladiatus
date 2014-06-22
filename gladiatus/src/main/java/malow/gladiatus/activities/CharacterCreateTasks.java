@@ -495,16 +495,19 @@ public class CharacterCreateTasks
             {
                 TextView errorText = (TextView) Globals.characterCreateActivity.findViewById(R.id.character_creation_error_text);
                 errorText.setText(errorCode);
+
+                // scroll to bottom to see the text.
+                final ScrollView scrollview = ((ScrollView) Globals.characterCreateActivity.findViewById(R.id.scrollView));
+                scrollview.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {Thread.sleep(100);} catch (InterruptedException e) {}
+                        scrollview.fullScroll(ScrollView.FOCUS_DOWN);
+                    }
+                });
             }
         });
 
-        // scroll to bottom to see the text.
-        final ScrollView scrollview = ((ScrollView) Globals.characterCreateActivity.findViewById(R.id.scrollView));
-        scrollview.post(new Runnable() {
-            @Override
-            public void run() {
-                scrollview.fullScroll(ScrollView.FOCUS_DOWN);
-            }
-        });
+
     }
 }

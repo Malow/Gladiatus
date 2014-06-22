@@ -39,8 +39,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
                 android:ems="10"
-                android:id="@+id/login_usernameField"
-                />
+                android:id="@+id/login_usernameField"/>
         </LinearLayout>
 
         <LinearLayout

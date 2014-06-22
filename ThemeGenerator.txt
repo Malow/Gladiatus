@@ -1,1 +1,3 @@
 http://jgilfelt.github.io/android-actionbarstylegenerator/#name=GladiatusTheme&compat=holo&theme=light&actionbarstyle=solid&texture=0&hairline=0&neutralPressed=1&backColor=3c3327%2C100&secondaryColor=b5ae94%2C100&tabColor=3c3327%2C100&tertiaryColor=b5ae94%2C100&accentColor=b5ae94%2C100&cabBackColor=3c3327%2C100&cabHighlightColor=3c3327%2C100
+
+http://android-holo-colors.com/
