@@ -208,7 +208,7 @@ public class SQLConnector
 			throw new AccountAlreadyHasACharacterException();
 		}
 				
-		PreparedStatement newCharacterStatement = connect.prepareStatement("insert into Gladiatus.Characters values (default, ?, ?, ?, ?, ?, ?, ?, ?);");
+		PreparedStatement newCharacterStatement = connect.prepareStatement("insert into Gladiatus.Characters values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
 		newCharacterStatement.setInt(1, accountId);
 		newCharacterStatement.setString(2, request.characterName);
 		newCharacterStatement.setString(3, request.characterImage);
@@ -217,6 +217,7 @@ public class SQLConnector
 		newCharacterStatement.setFloat(6, request.stats.dexterity);
 		newCharacterStatement.setFloat(7, request.stats.intelligence);
 		newCharacterStatement.setFloat(8, request.stats.willpower);
+		newCharacterStatement.setInt(9, Constants.STARTING_MONEY);
 		int rowCount = newCharacterStatement.executeUpdate();
 		newCharacterStatement.close();
 		
