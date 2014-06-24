@@ -2,6 +2,7 @@ package malow.gladiatus.activities;
 
 
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 
 import malow.gladiatus.Globals;
@@ -31,7 +32,6 @@ public class MainActivityOnClick
             MainTasks.LoginTask(new LoginRequest(username, encryptedPassword));
         }
     }
-
 
     public static Register register()
     {

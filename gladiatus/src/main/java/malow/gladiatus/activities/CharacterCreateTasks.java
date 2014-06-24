@@ -1,6 +1,7 @@
 package malow.gladiatus.activities;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
@@ -10,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -39,14 +42,19 @@ public class CharacterCreateTasks
 {
     public static void CreateCharacter()
     {
+        HideKeyboard();
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... voids)
             {
-
                 String characterName = ((EditText) Globals.characterCreateActivity.findViewById(R.id.create_nameField)).getText().toString();
                 CreatingCharacter g = CharacterCreateActivity.creatingCharacter;
-                CharacterCreateRequest request = new CharacterCreateRequest(characterName, g.image, g.totalStats, g.abilities, Globals.sessionId);
+
+                List<Integer> abiltiesAsInt = new ArrayList<Integer>();
+                for(Ability ability: g.abilities)
+                    abiltiesAsInt.add(ability.id);
+
+                CharacterCreateRequest request = new CharacterCreateRequest(characterName, g.image, g.totalStats, abiltiesAsInt, Globals.sessionId);
 
                 ModelInterface response = null;
                 try
@@ -151,15 +159,15 @@ public class CharacterCreateTasks
             public void run()
             {
                 ImageButton img = (ImageButton) Globals.characterCreateActivity.findViewById(R.id.create_character_pick_image);
-                if(id.equals("1"))
+                if (id.equals("1"))
                 {
                     img.setImageResource(R.drawable.gladiator_template);
                 }
-                else if(id.equals("2"))
+                else if (id.equals("2"))
                 {
                     img.setImageResource(R.drawable.gladiator_template2);
                 }
-                else if(id.equals("3"))
+                else if (id.equals("3"))
                 {
                     img.setImageResource(R.drawable.gladiator_template3);
                 }
@@ -507,7 +515,16 @@ public class CharacterCreateTasks
                 });
             }
         });
+    }
 
-
+    public static void HideKeyboard()
+    {
+        View target = null;
+        if(Globals.characterCreateActivity != null)
+            target = Globals.characterCreateActivity.getCurrentFocus();
+        if (target != null) {
+            InputMethodManager imm = (InputMethodManager) target.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(target.getWindowToken(), 0);
+        }
     }
 }

@@ -17,14 +17,14 @@ public class CharacterCreateRequest implements ModelInterface
     public final String characterName;
     public final String characterImage;
     public final Stats stats;
-    public final List<Ability> abilities;
+    public final List<Integer> abilities;
     public final String sessionId;
 
     @JsonCreator
     public CharacterCreateRequest(@JsonProperty("characterName") String characterName,
                                  @JsonProperty("characterImage") String characterImage,
                                  @JsonProperty("stats") Stats stats,
-                                 @JsonProperty("abilities") List<Ability> abilities,
+                                 @JsonProperty("abilities") List<Integer> abilities,
                                  @JsonProperty("sessionId") String sessionId)
     {
         this.characterName = characterName;

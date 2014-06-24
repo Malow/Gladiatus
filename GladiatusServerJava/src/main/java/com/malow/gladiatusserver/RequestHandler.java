@@ -16,8 +16,10 @@ import malow.gladiatus.common.models.requests.LoginRequest;
 import malow.gladiatus.common.models.requests.RegisterRequest;
 import malow.gladiatus.common.models.responses.BasicAbilitiesResponse;
 import malow.gladiatus.common.models.responses.CharacterCreationFailedResponse;
-import malow.gladiatus.common.models.responses.LoginResponse;
+import malow.gladiatus.common.models.responses.LoginFailedResponse;
+import malow.gladiatus.common.models.responses.LoginSuccessfulResponse;
 import malow.gladiatus.common.models.responses.NoCharacterFoundResponse;
+import malow.gladiatus.common.models.responses.RegisterFailedResponse;
 import malow.gladiatus.common.models.responses.SessionExpiredResponse;
 import malow.gladiatus.common.models.responses.SomethingWentHorriblyWrongResponse;
 import malow.malowlib.NetworkChannel;
@@ -26,54 +28,51 @@ public class RequestHandler
 {
 	public static void handleLoginRequest(LoginRequest request, NetworkChannel sender)
 	{
-		String sessionId = "";
-		String errorCode = "";
+		ModelInterface response = null;
 		try 
 		{
-			sessionId = SQLConnector.authenticateAccount(request.username, request.password);
+			String sessionId = SQLConnector.authenticateAccount(request.username, request.password);
+			response = new LoginSuccessfulResponse(sessionId);
 		} 
 		catch (Exception e) 
 		{
 			if(e instanceof SQLConnector.WrongPasswordException)
 			{
-				errorCode = "Wrong username/password.";
+				response = new LoginFailedResponse("Wrong username/password.");
 				System.out.println("Client " + (sender.GetChannelID() + 1) + " failed login due to wrong password");
 			}
 			else
 			{
+				response = new LoginFailedResponse("Unexpected login error.");
 				System.out.println("Client " + (sender.GetChannelID() + 1) + " Unexpected login error.");
-				errorCode = "Unexpected login error.";	
 				e.printStackTrace();
 			}
 		}
-		LoginResponse response = new LoginResponse(sessionId, errorCode);
 		sender.SendData(response.toNetworkString());
 	}
 	
 	public static void handleRegisterRequest(RegisterRequest request, NetworkChannel sender) 
 	{
-		String sessionId = "";
-		String errorCode = "";
+		ModelInterface response = null;
 		try
 		{
-			sessionId = SQLConnector.registerAccount(request.username, request.password, request.email);
-			
+			String sessionId = SQLConnector.registerAccount(request.username, request.password, request.email);
+			response = new LoginSuccessfulResponse(sessionId);
 		}
 		catch (Exception e)
 		{
 			if(e instanceof SQLConnector.UsernameTakenException)
 			{
-				errorCode = "Username is already taken.";
+				response = new RegisterFailedResponse("Username is already taken.");
 				System.out.println("Client " + (sender.GetChannelID() + 1) + " failed login due to Username is already taken.");
 			}
 			else
 			{
+				response = new RegisterFailedResponse("Unexpected registration error.");
 				System.out.println("Client " + (sender.GetChannelID() + 1) + " Unexpected registration error.");
-				errorCode = "Unexpected registration error.";	
 				e.printStackTrace();
 			}
 		}
-		LoginResponse response = new LoginResponse(sessionId, errorCode);
 		sender.SendData(response.toNetworkString());
 	}
 	
@@ -110,7 +109,7 @@ public class RequestHandler
 
 	public static void handleBasicAbilitiesRequest(BasicAbilitiesRequest request, NetworkChannel sender) 
 	{
-		//String sessionId = request.sessionId;
+		//String sessionId = request.sessionId;	// TODO: Maybe later verify that sessionId is valid if u want this info?
 		ModelInterface response = null;
 		try
 		{

@@ -1,10 +1,13 @@
 package malow.gladiatus.activities;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 
 import malow.gladiatus.Globals;
@@ -18,6 +21,8 @@ public class MainActivityFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         int tab = getArguments().getInt(TAB_NUMBER);
+        Globals.mainActivityFragment = this;
+
         if(tab == 0)
         {
             View v = inflater.inflate(R.layout.login_screen, container, false);

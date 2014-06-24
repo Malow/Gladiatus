@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -13,7 +12,6 @@ import malow.gladiatus.common.models.Ability;
 import malow.gladiatus.common.models.ModelInterface;
 import malow.gladiatus.common.models.requests.CharacterCreateRequest;
 import malow.gladiatus.common.models.responses.BasicAbilitiesResponse;
-import malow.gladiatus.common.models.responses.CharacterCreationFailedResponse;
 import malow.gladiatus.common.models.responses.CharacterCreationSuccessfulResponse;
 import malow.gladiatus.common.models.responses.CharacterInfoResponse;
 
@@ -207,8 +205,10 @@ public class SQLConnector
 		{
 			throw new AccountAlreadyHasACharacterException();
 		}
+		
+		String abilitiesAsString = createStringFromAbilityList(request.abilities);
 				
-		PreparedStatement newCharacterStatement = connect.prepareStatement("insert into Gladiatus.Characters values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
+		PreparedStatement newCharacterStatement = connect.prepareStatement("insert into Gladiatus.Characters values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
 		newCharacterStatement.setInt(1, accountId);
 		newCharacterStatement.setString(2, request.characterName);
 		newCharacterStatement.setString(3, request.characterImage);
@@ -218,6 +218,7 @@ public class SQLConnector
 		newCharacterStatement.setFloat(7, request.stats.intelligence);
 		newCharacterStatement.setFloat(8, request.stats.willpower);
 		newCharacterStatement.setInt(9, Constants.STARTING_MONEY);
+		newCharacterStatement.setString(10, abilitiesAsString);
 		int rowCount = newCharacterStatement.executeUpdate();
 		newCharacterStatement.close();
 		
@@ -233,7 +234,20 @@ public class SQLConnector
 	
 	
 	
+	private static String createStringFromAbilityList(List<Integer> abilities)
+	{
+		String ret = "";
+		for(int abilityId: abilities)
+		{
+			ret += abilityId + ",";
+		}
+		return ret;
+	}
 	
+//	private static List<Integer> createAbilityListFromString(String abilities)
+//	{
+//		
+//	}
 	
 	
 	

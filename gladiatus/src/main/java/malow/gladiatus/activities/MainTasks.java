@@ -1,10 +1,13 @@
 package malow.gladiatus.activities;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
 import malow.gladiatus.Globals;
@@ -22,6 +25,7 @@ public class MainTasks
 {
     public static void LoginTask(final LoginRequest loginRequest)
     {
+        HideFragmentKeyboard();
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {
@@ -58,6 +62,7 @@ public class MainTasks
 
     public static void RegisterTask(final RegisterRequest registerRequest)
     {
+        HideFragmentKeyboard();
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {
@@ -99,8 +104,8 @@ public class MainTasks
 
     public static void GoToCharacterInfo()
     {
-            Intent i = new Intent(Globals.mainActivity, CharacterInfoActivity.class);
-            Globals.mainActivity.startActivity(i);
+        Intent i = new Intent(Globals.mainActivity, CharacterInfoActivity.class);
+        Globals.mainActivity.startActivity(i);
     }
 
     public static void SetLoginErrorText(final String errorCode)
@@ -131,10 +136,23 @@ public class MainTasks
 
     public static void SwitchToTab(int tab)
     {
+        HideFragmentKeyboard();
+
         Fragment fragment = new MainActivityFragment();
         Bundle args = new Bundle();
         args.putInt(MainActivityFragment.TAB_NUMBER, tab);
         fragment.setArguments(args);
         Globals.mainActivity.getFragmentManager().beginTransaction().replace(R.id.LoginTabView, fragment).commit();
+    }
+
+    public static void HideFragmentKeyboard()
+    {
+        View target = null;
+        if(Globals.mainActivityFragment != null)
+            target = Globals.mainActivityFragment.getView().findFocus();
+        if (target != null) {
+            InputMethodManager imm = (InputMethodManager) target.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(target.getWindowToken(), 0);
+        }
     }
 }

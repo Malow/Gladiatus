@@ -23,6 +23,7 @@ CREATE TABLE Characters (id INT NOT NULL AUTO_INCREMENT,
     intelligence FLOAT NOT NULL, 
     willpower FLOAT NOT NULL, 
     money INT NOT NULL,
+    abilities VARCHAR(100) NOT NULL,
     PRIMARY KEY (ID),
     FOREIGN KEY (account_id) REFERENCES Accounts(id));
 

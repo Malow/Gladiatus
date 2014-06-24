@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.app.FragmentActivity;
+import android.view.WindowManager;
 import android.widget.Button;
 
 import malow.gladiatus.Globals;
@@ -56,7 +57,9 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction)
     {
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         MainTasks.SwitchToTab(tab.getPosition());
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
 
     @Override
@@ -90,5 +93,4 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         }
         return super.onOptionsItemSelected(item);
     }
-
 }
