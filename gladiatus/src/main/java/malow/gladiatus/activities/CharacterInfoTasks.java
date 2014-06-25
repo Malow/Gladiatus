@@ -8,6 +8,8 @@ import android.widget.TextView;
 import malow.gladiatus.Globals;
 import malow.gladiatus.NetworkClient;
 import malow.gladiatus.R;
+import malow.gladiatus.common.models.Armor;
+import malow.gladiatus.common.models.Initiative;
 import malow.gladiatus.common.models.ModelInterface;
 import malow.gladiatus.common.models.requests.CharacterInfoRequest;
 import malow.gladiatus.common.models.responses.CharacterInfoResponse;
@@ -18,6 +20,7 @@ public class CharacterInfoTasks
 {
     public static void updateCharacterInfoTexts()
     {
+        /*
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {
@@ -35,7 +38,7 @@ public class CharacterInfoTasks
                         health.setText(((CharacterInfoResponse) response).health);
 
                         TextView armor = (TextView) Globals.characterInfoActivity.findViewById(R.id.armorText);
-                        armor.setText(((CharacterInfoResponse) response).armor);
+                        armor.setText(Integer.toString((int) Armor.GetArmor((CharacterInfoResponse) response)));
 
                         TextView strength = (TextView) Globals.characterInfoActivity.findViewById(R.id.strengthText);
                         strength.setText(((CharacterInfoResponse) response).strength);
@@ -44,7 +47,7 @@ public class CharacterInfoTasks
                         dexterity.setText(((CharacterInfoResponse) response).dexterity);
 
                         TextView initiative = (TextView) Globals.characterInfoActivity.findViewById(R.id.initiativeText);
-                        initiative.setText(((CharacterInfoResponse) response).initiative);
+                        initiative.setText(Integer.toString((int) Initiative.GetInitiative((CharacterInfoResponse) response)));
                     }
                     else if(response instanceof NoCharacterFoundResponse)
                     {
@@ -59,6 +62,7 @@ public class CharacterInfoTasks
                 return null;
             }
         }.execute();
+        */
     }
 
     public static void GoToCharacterCreate()

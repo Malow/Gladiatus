@@ -17,5 +17,6 @@
 
     <color name="GladiatusErrorTextColor">#ffa40912</color>
     <color name="GladiatusFocusColor">#768b99</color>
+    <color name="GladiatusHealthGreenColor">#449944</color>
 
     </resources>

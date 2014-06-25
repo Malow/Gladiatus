@@ -27,6 +27,8 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         Globals.mainActivity = this;
         setContentView(R.layout.activity_main);
 
+        //MainTasks.GoToCharacterInfo();    // For debugging to go straight to CharInfo screen.
+
         // Set up the action bar to show tabs.
         final ActionBar actionBar = getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
