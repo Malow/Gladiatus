@@ -107,7 +107,10 @@ public class SQLConnector
 			String strength = Float.toString(characterResult.getFloat("strength"));
 			String dexterity = Float.toString(characterResult.getFloat("dexterity"));
 			
-			response = new CharacterInfoResponse(characterName, characterImage, health, "0", strength, dexterity, "0");
+			List<Ability> abs = new ArrayList<Ability>();
+			abs.add(new Ability(1, "Asd", "asdasd", "[ASD]"));
+			
+			response = new CharacterInfoResponse(characterName, characterImage, health, strength, dexterity, "7", "8", 1001, abs);
 		}
 		else
 		{
