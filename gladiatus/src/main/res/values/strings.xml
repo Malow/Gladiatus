@@ -52,4 +52,18 @@
 
     <string name="a_fucking_image">A fucking image</string>
 
+    <string name="level_label">Level</string>
+    <string name="xp_label">XP:</string>
+
+    <string name="hit_roll_label">Hit roll:</string>
+    <string name="damage_roll_label">Damage roll:</string>
+    <string name="weight_label">Weight:</string>
+    <string name="gold_label">Gold:</string>
+
+
+    <string name="character_info_tab_1">Info</string>
+    <string name="character_info_tab_2">Training</string>
+    <string name="character_info_tab_3">Inventory</string>
+    <string name="character_info_tab_4">Abilities</string>
+
 </resources>

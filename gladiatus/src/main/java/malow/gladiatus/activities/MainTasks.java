@@ -13,11 +13,16 @@ import android.widget.TextView;
 import malow.gladiatus.Globals;
 import malow.gladiatus.NetworkClient;
 import malow.gladiatus.R;
+import malow.gladiatus.common.models.Armor;
+import malow.gladiatus.common.models.Initiative;
 import malow.gladiatus.common.models.ModelInterface;
+import malow.gladiatus.common.models.requests.CharacterInfoRequest;
 import malow.gladiatus.common.models.requests.LoginRequest;
 import malow.gladiatus.common.models.requests.RegisterRequest;
+import malow.gladiatus.common.models.responses.CharacterInfoResponse;
 import malow.gladiatus.common.models.responses.LoginFailedResponse;
 import malow.gladiatus.common.models.responses.LoginSuccessfulResponse;
+import malow.gladiatus.common.models.responses.NoCharacterFoundResponse;
 import malow.gladiatus.common.models.responses.RegisterFailedResponse;
 import malow.malowlib.RequestResponseClient;
 
@@ -36,7 +41,7 @@ public class MainTasks
                     if(loginResponse instanceof LoginSuccessfulResponse)
                     {
                         Globals.sessionId = ((LoginSuccessfulResponse) loginResponse).sessionId;
-                        GoToCharacterInfo();
+                        FinishLogin();
                     }
                     else if(loginResponse instanceof LoginFailedResponse)
                     {
@@ -73,7 +78,7 @@ public class MainTasks
                     if(registerResponse instanceof LoginSuccessfulResponse)
                     {
                         Globals.sessionId = ((LoginSuccessfulResponse) registerResponse).sessionId;
-                        GoToCharacterInfo();
+                        FinishLogin();
                     }
                     else if(registerResponse instanceof LoginFailedResponse)
                     {
@@ -102,9 +107,44 @@ public class MainTasks
         }.execute();
     }
 
-    public static void GoToCharacterInfo()
+    private static void FinishLogin()
+    {
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                CharacterInfoRequest characterInfoRequest = new CharacterInfoRequest(Globals.sessionId);
+                ModelInterface response = null;
+                try
+                {
+                    response = NetworkClient.sendAndReceive(characterInfoRequest);
+                    if(response instanceof CharacterInfoResponse)
+                    {
+                        GoToCharacterInfo((CharacterInfoResponse) response);
+                    }
+                    else if(response instanceof NoCharacterFoundResponse)
+                    {
+                        GoToCharacterCreate();
+                    }
+                }
+                catch (RequestResponseClient.ConnectionBrokenException e)
+                {
+                    Log.i(this.getClass().getSimpleName(), "CharacterInfoRequest failed, couldn't connect to server:");
+                }
+                return null;
+            }
+        }.execute();
+    }
+
+    public static void GoToCharacterInfo(CharacterInfoResponse response)
     {
         Intent i = new Intent(Globals.mainActivity, CharacterInfoActivity.class);
+        i.putExtra("characterInfoResponse", response.toNetworkString());
+        Globals.mainActivity.startActivity(i);
+    }
+
+    public static void GoToCharacterCreate()
+    {
+        Intent i = new Intent(Globals.mainActivity, CharacterCreateActivity.class);
         Globals.mainActivity.startActivity(i);
     }
 
