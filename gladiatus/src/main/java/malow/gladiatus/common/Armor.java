@@ -1,4 +1,4 @@
-package malow.gladiatus.common.models;
+package malow.gladiatus.common;
 
 
 import malow.gladiatus.common.models.responses.CharacterInfoResponse;

@@ -11,13 +11,15 @@ public class GladiatusServer
 
 		//cout << "Port to listen to: ";
 		int port = 7000;
-		//cin >> port;
+		//cin >> port;	// nope, config file
 		//cin.ignore();
 
 		Server serv = new Server();
 		serv.Start();
 		ConnectionListener cl = new ConnectionListener(port, serv);
 		cl.Start();
+		
+		LoadFromDatabase();
 
 		String input = "";
 		Scanner in = new Scanner(System.in);
@@ -25,6 +27,12 @@ public class GladiatusServer
 		{
 			System.out.print("> ");
 			input = in.next();
+			
+			if(input.equals("help"))
+				PrintHelp();
+			
+			if(input.equals("reload:db"))
+				LoadFromDatabase();
 		}
 		
 		in.close();
@@ -34,5 +42,22 @@ public class GladiatusServer
 		serv.WaitUntillDone();
 		cl = null;
 		serv = null;
+	}
+	
+	public static void LoadFromDatabase()
+	{
+		try {
+			Abilities.LoadFromDatabase();
+		} catch (Exception e) {
+			System.out.println("Error reading Abilities from database.");
+			e.printStackTrace();
+		}
+	}
+	
+	public static void PrintHelp()
+	{
+		System.out.println("Commands:");
+		System.out.println("help - Displays this help.");
+		System.out.println("reload db - Reloads static information from database.");
 	}
 }

@@ -14,27 +14,39 @@ public class CharacterInfoResponse implements ModelInterface
 {
     public final String characterName;
     public final String characterImage;
-    public final String health;
-    public final String strength;
-    public final String dexterity;
-    public final String intelligence;
-    public final String willpower;
+    public final int level;
+    public final int xp;
+    public final String status;
+    public final float currentHealth;
+    public final float health;
+    public final float strength;
+    public final float dexterity;
+    public final float intelligence;
+    public final float willpower;
     public final int money;
     public final List<Ability> abilities;
 
     @JsonCreator
     public CharacterInfoResponse(@JsonProperty("characterName") String characterName,
                                  @JsonProperty("characterImage") String characterImage,
-                                 @JsonProperty("health") String health,
-                                 @JsonProperty("strength") String strength,
-                                 @JsonProperty("dexterity") String dexterity,
-                                 @JsonProperty("intelligence") String intelligence,
-                                 @JsonProperty("willpower") String willpower,
+                                 @JsonProperty("level") int level,
+                                 @JsonProperty("xp") int xp,
+                                 @JsonProperty("status") String status,
+                                 @JsonProperty("currentHealth") float currentHealth,
+                                 @JsonProperty("health") float health,
+                                 @JsonProperty("strength") float strength,
+                                 @JsonProperty("dexterity") float dexterity,
+                                 @JsonProperty("intelligence") float intelligence,
+                                 @JsonProperty("willpower") float willpower,
                                  @JsonProperty("money") int money,
                                  @JsonProperty("abilities") List<Ability> abilities)
     {
         this.characterName = characterName;
         this.characterImage = characterImage;
+        this.level = level;
+        this.xp = xp;
+        this.status = status;
+        this.currentHealth = currentHealth;
         this.health = health;
         this.strength = strength;
         this.dexterity = dexterity;

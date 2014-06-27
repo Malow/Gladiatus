@@ -11,7 +11,6 @@ import java.util.UUID;
 import malow.gladiatus.common.models.Ability;
 import malow.gladiatus.common.models.ModelInterface;
 import malow.gladiatus.common.models.requests.CharacterCreateRequest;
-import malow.gladiatus.common.models.responses.BasicAbilitiesResponse;
 import malow.gladiatus.common.models.responses.CharacterCreationSuccessfulResponse;
 import malow.gladiatus.common.models.responses.CharacterInfoResponse;
 
@@ -101,16 +100,26 @@ public class SQLConnector
 		
 		if(characterResult.next())
 		{
-			String characterName = characterResult.getString("character_name");
-			String characterImage = characterResult.getString("character_image");
-			String health = Float.toString(characterResult.getFloat("health"));
-			String strength = Float.toString(characterResult.getFloat("strength"));
-			String dexterity = Float.toString(characterResult.getFloat("dexterity"));
+			String characterName = characterResult.getString("name");
+			String characterImage = characterResult.getString("image");
+			int level = characterResult.getInt("level");
+			int xp = characterResult.getInt("xp");
+			String status = characterResult.getString("status");
+			float currentHealth = characterResult.getFloat("currentHealth");
+			float health = characterResult.getFloat("health");
+			float strength = characterResult.getFloat("strength");
+			float dexterity = characterResult.getFloat("dexterity");
+			float intelligence = characterResult.getFloat("intelligence");
+			float willpower = characterResult.getFloat("willpower");
+			int money = characterResult.getInt("money");
+			String abilities = characterResult.getString("abilities");
 			
+			String[] ids = abilities.split(",");
 			List<Ability> abs = new ArrayList<Ability>();
-			abs.add(new Ability(1, "Asd", "asdasd", "[ASD]"));
+			for(String ab : ids)
+				abs.add(Abilities.GetAbilityById(Integer.parseInt(ab)));
 			
-			response = new CharacterInfoResponse(characterName, characterImage, health, strength, dexterity, "7", "8", 1001, abs);
+			response = new CharacterInfoResponse(characterName, characterImage, level, xp, status, currentHealth, health, strength, dexterity, intelligence, willpower, money, abs);
 		}
 		else
 		{
@@ -170,28 +179,6 @@ public class SQLConnector
 		return ret;
 	}
 
-	public static BasicAbilitiesResponse getBasicAbilities() throws Exception
-	{
-		List<Ability> abilities = new ArrayList<Ability>();
-		Class.forName("com.mysql.jdbc.Driver");
-		Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/Gladiatus?" + "user=GladiatusServer&password=qqiuIUr348EW");
-		  
-		PreparedStatement accountStatement = connect.prepareStatement("SELECT * FROM Basic_abilities; ");
-		ResultSet accountResult = accountStatement.executeQuery();
-		
-		while (accountResult.next()) 
-		{
-			int abilityId = accountResult.getInt("id");
-			String name = accountResult.getString("name");
-			String description = accountResult.getString("description");
-			String tags = accountResult.getString("tags");
-			
-			abilities.add(new Ability(abilityId, name, description, tags));
-		}
-		
-		return new BasicAbilitiesResponse(abilities);
-	}
-
 	public static ModelInterface createCharacter(CharacterCreateRequest request) throws Exception 
 	{
 		Class.forName("com.mysql.jdbc.Driver");
@@ -211,17 +198,21 @@ public class SQLConnector
 		
 		String abilitiesAsString = createStringFromAbilityList(request.abilities);
 				
-		PreparedStatement newCharacterStatement = connect.prepareStatement("insert into Gladiatus.Characters values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
+		PreparedStatement newCharacterStatement = connect.prepareStatement("insert into Gladiatus.Characters values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
 		newCharacterStatement.setInt(1, accountId);
 		newCharacterStatement.setString(2, request.characterName);
 		newCharacterStatement.setString(3, request.characterImage);
-		newCharacterStatement.setFloat(4, request.stats.health);
-		newCharacterStatement.setFloat(5, request.stats.strength);
-		newCharacterStatement.setFloat(6, request.stats.dexterity);
-		newCharacterStatement.setFloat(7, request.stats.intelligence);
-		newCharacterStatement.setFloat(8, request.stats.willpower);
-		newCharacterStatement.setInt(9, Constants.STARTING_MONEY);
-		newCharacterStatement.setString(10, abilitiesAsString);
+		newCharacterStatement.setInt(4, 1);
+		newCharacterStatement.setInt(5, 0);
+		newCharacterStatement.setString(6, "No wounds - Not exhausted");
+		newCharacterStatement.setFloat(7, request.stats.health);
+		newCharacterStatement.setFloat(8, request.stats.health);
+		newCharacterStatement.setFloat(9, request.stats.strength);
+		newCharacterStatement.setFloat(10, request.stats.dexterity);
+		newCharacterStatement.setFloat(11, request.stats.intelligence);
+		newCharacterStatement.setFloat(12, request.stats.willpower);
+		newCharacterStatement.setInt(13, Constants.STARTING_MONEY);
+		newCharacterStatement.setString(14, abilitiesAsString);
 		int rowCount = newCharacterStatement.executeUpdate();
 		newCharacterStatement.close();
 		
@@ -259,7 +250,7 @@ public class SQLConnector
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/Gladiatus?" + "user=GladiatusServer&password=qqiuIUr348EW");
 
-		PreparedStatement accountStatement = connect.prepareStatement("SELECT * FROM Characters WHERE character_name = ? ; ");
+		PreparedStatement accountStatement = connect.prepareStatement("SELECT * FROM Characters WHERE name = ? ; ");
 		accountStatement.setString(1, characterName);
 		ResultSet accountResult = accountStatement.executeQuery();
 		

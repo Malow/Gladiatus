@@ -66,4 +66,8 @@
     <string name="character_info_tab_3">Inventory</string>
     <string name="character_info_tab_4">Abilities</string>
 
+    <string name="no_encumbrance">Not encumbered</string>
+    <string name="light_encumbrance">Lightly encumbered</string>
+    <string name="heavy_encumbrance">Heavily encumbered</string>
+
 </resources>

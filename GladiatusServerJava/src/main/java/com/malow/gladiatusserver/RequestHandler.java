@@ -1,6 +1,7 @@
 package com.malow.gladiatusserver;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.malow.gladiatusserver.SQLConnector.AccountAlreadyHasACharacterException;
 import com.malow.gladiatusserver.SQLConnector.CharacternameTakenException;
@@ -113,7 +114,8 @@ public class RequestHandler
 		ModelInterface response = null;
 		try
 		{
-			response = SQLConnector.getBasicAbilities();
+			List<Ability> abilities = Abilities.GetBasicAbilities();
+			response = new BasicAbilitiesResponse(abilities);
 		}
 		catch (Exception e)
 		{

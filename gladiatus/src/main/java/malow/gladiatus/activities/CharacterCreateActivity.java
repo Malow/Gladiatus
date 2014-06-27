@@ -30,9 +30,9 @@ public class CharacterCreateActivity extends Activity
         ImageButton imagePickButton = (ImageButton) findViewById(R.id.create_character_pick_image);
         imagePickButton.setOnClickListener(CharacterCreateOnClick.openImagePickerPopup());
 
-        creatingCharacter.abilities.add(new Ability(1, "Attack", "Basic attack.", "[Active] [Range:Weapon]"));
-        creatingCharacter.abilities.add(new Ability(-1, "", "<Press here to choose an ability>", ""));
-        creatingCharacter.abilities.add(new Ability(-1, "", "<Press here to choose an ability>", ""));
+        creatingCharacter.abilities.add(new Ability(1, "Attack", "Basic attack.", "[Active] [Range:Weapon]", 1));
+        creatingCharacter.abilities.add(new Ability(-1, "", "<Press here to choose an ability>", "", 0));
+        creatingCharacter.abilities.add(new Ability(-1, "", "<Press here to choose an ability>", "", 0));
         CharacterCreateTasks.UpdateAbilitiesList();
 
         CharacterCreateTasks.RandomizeBaseStats();

@@ -1,3 +1,4 @@
+DROP DATABASE Gladiatus;
 CREATE DATABASE Gladiatus;
 USE Gladiatus;
 
@@ -15,29 +16,34 @@ CREATE TABLE Accounts (id INT NOT NULL AUTO_INCREMENT,
 
 CREATE TABLE Characters (id INT NOT NULL AUTO_INCREMENT, 
     account_id INT,
-    character_name VARCHAR(40) NOT NULL UNIQUE,
-    character_image VARCHAR(40) NOT NULL,
+    name VARCHAR(40) NOT NULL UNIQUE,
+    image VARCHAR(40) NOT NULL,
+    level INT NOT NULL,
+    xp INT NOT NULL,
+    status VARCHAR(100),
+    currentHealth FLOAT NOT NULL,
     health FLOAT NOT NULL,
     strength FLOAT NOT NULL,
     dexterity FLOAT NOT NULL, 
     intelligence FLOAT NOT NULL, 
     willpower FLOAT NOT NULL, 
     money INT NOT NULL,
-    abilities VARCHAR(100) NOT NULL,
+    abilities VARCHAR(100) NOT NULL,ppå
     PRIMARY KEY (ID),
     FOREIGN KEY (account_id) REFERENCES Accounts(id));
 
-CREATE TABLE Basic_Abilities (id INT NOT NULL AUTO_INCREMENT, 
+CREATE TABLE Abilities (id INT NOT NULL AUTO_INCREMENT, 
     NAME VARCHAR(40) NOT NULL,
     description VARCHAR(100), 
     tags VARCHAR(40), 
+    tier INT NOT NULL,
     PRIMARY KEY (ID));
 
-INSERT INTO basic_abilities VALUES(DEFAULT, "Attack", "Basic attack.", "[Active] [Range:Weapon]");
-INSERT INTO basic_abilities VALUES(DEFAULT, "Shield Proficiency", "Basic shield proficiency, removing penelties for using it.", "[Passive]");
-INSERT INTO basic_abilities VALUES(DEFAULT, "Onehanded Sword Proficiency", "Basic onehanded Sword proficiency, removing penelties for using it.", "[Passive]");
-INSERT INTO basic_abilities VALUES(DEFAULT, "Crushing Blow", "Performs an offensive attack, giving +2 to hit but -2 to your armor for one round.", "[Active] [Range:Weapon]");
-INSERT INTO basic_abilities VALUES(DEFAULT, "Defensive Posture", "Puts you in a defensive posture, giving you +3 to your armor for one round.", "[Active]");
+INSERT INTO basic_abilities VALUES(DEFAULT, "Attack", "Basic attack.", "[Active] [Range:Weapon]", 1);
+INSERT INTO basic_abilities VALUES(DEFAULT, "Shield Proficiency", "Basic shield proficiency, removing penelties for using it.", "[Passive]", 1);
+INSERT INTO basic_abilities VALUES(DEFAULT, "Onehanded Sword Proficiency", "Basic onehanded Sword proficiency, removing penelties for using it.", "[Passive]", 1);
+INSERT INTO basic_abilities VALUES(DEFAULT, "Crushing Blow", "Performs an offensive attack, giving +2 to hit but -2 to your armor for one round.", "[Active] [Range:Weapon]", 1);
+INSERT INTO basic_abilities VALUES(DEFAULT, "Defensive Posture", "Puts you in a defensive posture, giving you +3 to your armor for one round.", "[Active]", 1);
 
 
 

@@ -181,6 +181,14 @@
                     android:text="(+7)"
                     android:id="@+id/character_info_health_bonus_text"
                     android:textColor="@color/GladiatusHealthGreenColor"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/character_info_health_training"
+                    android:layout_marginLeft="20dp"
+                    android:textColor="@color/GladiatusHealthGreenColor" />
             </TableRow>
 
             <TableRow
@@ -208,7 +216,15 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="(+5)"
-                    android:id="@+id/character_info_stringh_bonus_text"
+                    android:id="@+id/character_info_strength_bonus_text"
+                    android:textColor="@color/GladiatusHealthGreenColor"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/character_info_strength_training"
+                    android:layout_marginLeft="20dp"
                     android:textColor="@color/GladiatusHealthGreenColor"/>
             </TableRow>
 
@@ -239,6 +255,14 @@
                     android:text="(+2)"
                     android:id="@+id/character_info_dexterity_bonus_text"
                     android:textColor="@color/GladiatusHealthGreenColor"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/character_info_dexterity_training"
+                    android:layout_marginLeft="20dp"
+                    android:textColor="@color/GladiatusHealthGreenColor" />
             </TableRow>
 
             <TableRow
@@ -268,6 +292,14 @@
                     android:text=""
                     android:id="@+id/character_info_intelligence_bonus_text"
                     android:textColor="@color/GladiatusHealthGreenColor"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/character_info_intelligence_training"
+                    android:layout_marginLeft="20dp"
+                    android:textColor="@color/GladiatusHealthGreenColor" />
             </TableRow>
 
             <TableRow
@@ -297,6 +329,14 @@
                     android:text=""
                     android:id="@+id/character_info_willpower_bonus_text"
                     android:textColor="@color/GladiatusHealthGreenColor"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/character_info_willpower_training"
+                    android:layout_marginLeft="20dp"
+                    android:textColor="@color/GladiatusHealthGreenColor" />
             </TableRow>
 
             <TableRow

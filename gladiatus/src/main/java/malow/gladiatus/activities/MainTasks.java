@@ -13,8 +13,6 @@ import android.widget.TextView;
 import malow.gladiatus.Globals;
 import malow.gladiatus.NetworkClient;
 import malow.gladiatus.R;
-import malow.gladiatus.common.models.Armor;
-import malow.gladiatus.common.models.Initiative;
 import malow.gladiatus.common.models.ModelInterface;
 import malow.gladiatus.common.models.requests.CharacterInfoRequest;
 import malow.gladiatus.common.models.requests.LoginRequest;
@@ -124,6 +122,10 @@ public class MainTasks
                     else if(response instanceof NoCharacterFoundResponse)
                     {
                         GoToCharacterCreate();
+                    }
+                    else
+                    {
+                        Log.e(this.getClass().getSimpleName(), "CharacterInfoRequest failed, Unexpected response: " + response);
                     }
                 }
                 catch (RequestResponseClient.ConnectionBrokenException e)

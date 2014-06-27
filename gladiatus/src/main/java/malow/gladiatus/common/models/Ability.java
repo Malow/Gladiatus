@@ -9,15 +9,20 @@ public class Ability
     public final String name;
     public final String description;
     public final String tags;
+    public final int tier;
 
     @JsonCreator
-    public Ability(@JsonProperty("id") int id, @JsonProperty("name") String name,
-                   @JsonProperty("description") String description, @JsonProperty("tags") String tags)
+    public Ability(@JsonProperty("id") int id, 
+    		       @JsonProperty("name") String name,
+                   @JsonProperty("description") String description, 
+                   @JsonProperty("tags") String tags,
+                   @JsonProperty("tier") int tier)
     {
         this.id = id;
         this.name = name;
         this.description = description;
         this.tags = tags;
+        this.tier = tier;
     }
 
     @Override
