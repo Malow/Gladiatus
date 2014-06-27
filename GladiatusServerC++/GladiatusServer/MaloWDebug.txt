@@ -1,5 +1,0 @@
-18329.7: Error trying to perform shutdown on socket from a ->Close() call from another thread.
-18329.7: Invalid client socket, connection failed. Error: 10004
-18329.7: Error trying to perform shutdown on socket from a ->Close() call from another thread.
-18329.7: Failed to close socket. Error: 10093
-18329.7: Error cleaning up Winsock Library. Error: 10093
