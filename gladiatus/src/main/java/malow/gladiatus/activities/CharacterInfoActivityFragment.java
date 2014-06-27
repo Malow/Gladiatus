@@ -33,7 +33,7 @@ public class CharacterInfoActivityFragment extends Fragment
         }*/
         else
         {
-            return inflater.inflate(R.layout.character_info_screen, container, false);
+            return inflater.inflate(R.layout.login_screen, container, false);
         }
     }
 }

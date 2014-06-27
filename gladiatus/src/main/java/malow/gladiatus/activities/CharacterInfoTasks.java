@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -29,86 +28,93 @@ import malow.malowlib.RequestResponseClient;
 
 public class CharacterInfoTasks
 {
-    public static void UpdateCharacterInfoGUI(CharacterInfoResponse response)
+    public static void UpdateCharacterInfoGUI(final CharacterInfoResponse response)
     {
-        // Top stuff
-        SetImage(response.characterImage);
+        Globals.characterInfoActivity.runOnUiThread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                // Top stuff
+                SetImage(response.characterImage);
 
-        TextView name = (TextView) Globals.characterInfoActivity.findViewById(R.id.character_info_name);
-        name.setText(response.characterName);
+                TextView name = (TextView) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_name);
+                name.setText(response.characterName);
 
-        TextView level = (TextView) Globals.characterInfoActivity.findViewById(R.id.character_info_level);
-        level.setText(response.level);
+                TextView level = (TextView) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_level);
+                level.setText(String.valueOf(response.level));
 
-        String xpText = response.xp + " / " + Level.GetXpRequiredToLevelUp(response.level);
-        TextView xp = (TextView) Globals.characterInfoActivity.findViewById(R.id.character_info_xp_text);
-        xp.setText(xpText);
+                String xpText = response.xp + " / " + Level.GetXpRequiredToLevelUp(response.level);
+                TextView xp = (TextView) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_xp_text);
+                xp.setText(xpText);
 
-        ProgressBar xpBar = (ProgressBar) Globals.characterInfoActivity.findViewById(R.id.character_info_xp_bar);
-        xpBar.setProgress((int) ((response.xp / ((float)Level.GetXpRequiredToLevelUp(response.level))) * 100));
+                ProgressBar xpBar = (ProgressBar) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_xp_bar);
+                xpBar.setProgress((int) ((response.xp / ((float)Level.GetXpRequiredToLevelUp(response.level))) * 100));
 
-        String currentHealthText = (int) response.currentHealth + " / " + response.health;
-        TextView currentHealth = (TextView) Globals.characterInfoActivity.findViewById(R.id.character_info_current_health_text);
-        currentHealth.setText(currentHealthText);
+                String currentHealthText = (int) response.currentHealth + " / " + (int) response.health;
+                TextView currentHealth = (TextView) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_current_health_text);
+                currentHealth.setText(currentHealthText);
 
-        ProgressBar healthBar = (ProgressBar) Globals.characterInfoActivity.findViewById(R.id.character_info_health_bar);
-        healthBar.setProgress((int) ((response.currentHealth / response.health) * 100));
+                ProgressBar healthBar = (ProgressBar) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_health_bar);
+                healthBar.setProgress((int) ((response.currentHealth / response.health) * 100));
 
-        // Stats
+                // Stats
 
-        TextView health = (TextView) Globals.characterInfoActivity.findViewById(R.id.character_info_health_text);
-        health.setText((int) response.health);
-        TextView healthBonus = (TextView) Globals.characterInfoActivity.findViewById(R.id.character_info_health_bonus_text);
-        healthBonus.setText("");
+                TextView health = (TextView) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_health_text);
+                health.setText(String.valueOf((int) response.health));
+                TextView healthBonus = (TextView) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_health_bonus_text);
+                healthBonus.setText("");
 
-        TextView strength = (TextView) Globals.characterInfoActivity.findViewById(R.id.character_info_strength_text);
-        strength.setText((int) response.strength);
-        TextView strengthBonus = (TextView) Globals.characterInfoActivity.findViewById(R.id.character_info_strength_bonus_text);
-        strengthBonus.setText("");
-        TextView strengthTraining = (TextView) Globals.characterInfoActivity.findViewById(R.id.character_info_strength_training);
-        strengthTraining.setText(">>>");
+                TextView strength = (TextView) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_strength_text);
+                strength.setText(String.valueOf((int) response.strength));
+                TextView strengthBonus = (TextView) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_strength_bonus_text);
+                strengthBonus.setText("");
+                TextView strengthTraining = (TextView) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_strength_training);
+                strengthTraining.setText(">>>");
 
-        TextView dexterity = (TextView) Globals.characterInfoActivity.findViewById(R.id.character_info_dexterity_text);
-        dexterity.setText((int) response.dexterity);
-        TextView dexterityBonus = (TextView) Globals.characterInfoActivity.findViewById(R.id.character_info_dexterity_bonus_text);
-        dexterityBonus.setText("");
+                TextView dexterity = (TextView) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_dexterity_text);
+                dexterity.setText(String.valueOf((int) response.dexterity));
+                TextView dexterityBonus = (TextView) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_dexterity_bonus_text);
+                dexterityBonus.setText("");
 
-        TextView intelligence = (TextView) Globals.characterInfoActivity.findViewById(R.id.character_info_intelligence_text);
-        intelligence.setText((int) response.intelligence);
-        TextView intelligenceBonus = (TextView) Globals.characterInfoActivity.findViewById(R.id.character_info_intelligence_bonus_text);
-        intelligenceBonus.setText("");
+                TextView intelligence = (TextView) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_intelligence_text);
+                intelligence.setText(String.valueOf((int) response.intelligence));
+                TextView intelligenceBonus = (TextView) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_intelligence_bonus_text);
+                intelligenceBonus.setText("");
 
-        TextView willpower = (TextView) Globals.characterInfoActivity.findViewById(R.id.character_info_willpower_text);
-        willpower.setText((int) response.willpower);
-        TextView willpowerBonus = (TextView) Globals.characterInfoActivity.findViewById(R.id.character_info_willpower_bonus_text);
-        willpowerBonus.setText("");
+                TextView willpower = (TextView) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_willpower_text);
+                willpower.setText(String.valueOf((int) response.willpower));
+                TextView willpowerBonus = (TextView) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_willpower_bonus_text);
+                willpowerBonus.setText("");
 
-        TextView armor = (TextView) Globals.characterInfoActivity.findViewById(R.id.character_info_armor_text);
-        armor.setText((int) Armor.GetArmor(response));
-        TextView armorBonus = (TextView) Globals.characterInfoActivity.findViewById(R.id.character_info_armor_bonus_text);
-        armorBonus.setText("");
+                TextView armor = (TextView) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_armor_text);
+                armor.setText(String.valueOf((int) Armor.GetArmor(response)));
+                TextView armorBonus = (TextView) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_armor_bonus_text);
+                armorBonus.setText("");
 
-        TextView initiative = (TextView) Globals.characterInfoActivity.findViewById(R.id.character_info_initiative_text);
-        initiative.setText((int) Initiative.GetInitiative(response));
-        TextView initiativeBonus = (TextView) Globals.characterInfoActivity.findViewById(R.id.character_info_initiative_bonus_text);
-        initiativeBonus.setText("");
+                TextView initiative = (TextView) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_initiative_text);
+                initiative.setText(String.valueOf((int) Initiative.GetInitiative(response)));
+                TextView initiativeBonus = (TextView) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_initiative_bonus_text);
+                initiativeBonus.setText("");
 
-        // Dice Rolls
-        TextView damageDice = (TextView) Globals.characterInfoActivity.findViewById(R.id.character_info_damage_roll);
-        damageDice.setText(DiceRolls.GetDamageDice(response) + " + " + DiceRolls.GetDamageBonus(response));
+                // Dice Rolls
+                TextView damageDice = (TextView) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_damage_roll);
+                damageDice.setText(DiceRolls.GetDamageDice(response) + " + " + DiceRolls.GetDamageBonus(response));
 
-        TextView hitDice = (TextView) Globals.characterInfoActivity.findViewById(R.id.character_info_hit_roll);
-        hitDice.setText(DiceRolls.GetHitDice(response) + " + " + DiceRolls.GetHitBonus(response));
+                TextView hitDice = (TextView) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_hit_roll);
+                hitDice.setText(DiceRolls.GetHitDice(response) + " + " + DiceRolls.GetHitBonus(response));
 
-        // Info texts
-        TextView weightText = (TextView) Globals.characterInfoActivity.findViewById(R.id.character_info_weight_text);
-        weightText.setText(Weight.GetWeight(response) + " - " + Weight.GetEncumbrance(response.strength, response));
+                // Info texts
+                TextView weightText = (TextView) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_weight_text);
+                weightText.setText(Weight.GetWeight(response) + " - " + Weight.GetEncumbrance(response.strength, response));
 
-        TextView statusText = (TextView) Globals.characterInfoActivity.findViewById(R.id.character_info_status);
-        statusText.setText(response.status);
+                TextView statusText = (TextView) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_status);
+                statusText.setText(response.status);
 
-        TextView goldText = (TextView) Globals.characterInfoActivity.findViewById(R.id.character_info_gold_text);
-        goldText.setText(Money.GetMoneyAsString(response.money));
+                TextView goldText = (TextView) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_gold_text);
+                goldText.setText(Money.GetMoneyAsString(response.money));
+            }
+        });
     }
 
     public static void UpdateCharacterInfo()
@@ -152,6 +158,9 @@ public class CharacterInfoTasks
         args.putInt(CharacterInfoActivityFragment.TAB_NUMBER, tab);
         fragment.setArguments(args);
         Globals.characterInfoActivity.getFragmentManager().beginTransaction().replace(R.id.character_info_main_view, fragment).commit();
+
+        if(tab == 0 && CharacterInfoActivity.isResumed)
+            CharacterInfoTasks.UpdateCharacterInfo();
     }
 
     public static void HideFragmentKeyboard()
@@ -172,7 +181,7 @@ public class CharacterInfoTasks
             @Override
             public void run()
             {
-                ImageView img = (ImageView) Globals.characterInfoActivity.findViewById(R.id.character_info_image);
+                ImageView img = (ImageView) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_image);
                 if (id.equals("1"))
                 {
                     img.setImageResource(R.drawable.gladiator_template);

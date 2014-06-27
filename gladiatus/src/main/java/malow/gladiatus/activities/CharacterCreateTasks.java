@@ -193,19 +193,20 @@ public class CharacterCreateTasks
                     }
                     else
                     {
-                        Log.i(this.getClass().getSimpleName(), "BasicAbilitiesRequest failed, unexpected response: " + response);
+                        Log.e(this.getClass().getSimpleName(), "BasicAbilitiesRequest failed, unexpected response: " + response);
                         return null;
                     }
 
                 }
                 catch (RequestResponseClient.ConnectionBrokenException e)
                 {
-                    Log.i(this.getClass().getSimpleName(), "BasicAbilitiesRequest failed, couldn't connect to server:");
+                    Log.e(this.getClass().getSimpleName(), "BasicAbilitiesRequest failed, couldn't connect to server:");
                     return null;
                 }
 
                 if(response == null)
                 {
+                    Log.e(this.getClass().getSimpleName(), "BasicAbilitiesRequest failed, received null response:");
                     return null;
                 }
 

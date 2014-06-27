@@ -27,6 +27,7 @@ public class RequestResponseClient extends Process
             throw new ConnectionBrokenException();
         }
 
+        System.out.println("Sending data: " + msg);
         this.nc.SendData(msg);
 
         while(this.response == null)
@@ -64,6 +65,7 @@ public class RequestResponseClient extends Process
             if(ev instanceof NetworkPacket)
             {
                 this.response = ((NetworkPacket) ev).GetMessage();
+                System.out.println("Received data: " + this.response);
             }
         }
 

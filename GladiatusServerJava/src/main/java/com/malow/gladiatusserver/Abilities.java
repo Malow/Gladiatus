@@ -39,11 +39,12 @@ public class Abilities
 			
 			abilities.put(abilityId, a);
 			
-			if(abilityId == 1)
+			if(tier == 1)
 			{
 				basicAbilities.add(a);
 			}
 		}
+		System.out.println("Abilities successfully loaded from DB");
 	}
 	
 	public static List<Ability> GetBasicAbilities()

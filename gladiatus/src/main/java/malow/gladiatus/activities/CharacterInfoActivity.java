@@ -16,6 +16,7 @@ import malow.gladiatus.common.models.responses.CharacterInfoResponse;
 public class CharacterInfoActivity extends FragmentActivity implements ActionBar.TabListener
 {
     private static final String STATE_SELECTED_NAVIGATION_ITEM = "selected_navigation_item";
+    public static boolean isResumed = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -34,8 +35,8 @@ public class CharacterInfoActivity extends FragmentActivity implements ActionBar
         actionBar.addTab(actionBar.newTab().setText(R.string.character_info_tab_3).setTabListener(this));
         actionBar.addTab(actionBar.newTab().setText(R.string.character_info_tab_4).setTabListener(this));
 
-        CharacterInfoResponse response = (CharacterInfoResponse) ConvertStringToModel.toModel(getIntent().getStringExtra("characterInfoResponse"));
-        CharacterInfoTasks.UpdateCharacterInfoGUI(response);
+        // TODO: Use this
+        //CharacterInfoResponse startResponse = (CharacterInfoResponse) ConvertStringToModel.toModel(getIntent().getStringExtra("characterInfoResponse"));
     }
 
     @Override
@@ -78,6 +79,7 @@ public class CharacterInfoActivity extends FragmentActivity implements ActionBar
     {
         super.onResume();
         CharacterInfoTasks.UpdateCharacterInfo();
+        isResumed = true;
     }
 
     @Override

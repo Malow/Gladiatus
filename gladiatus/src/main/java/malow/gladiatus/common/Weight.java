@@ -45,7 +45,6 @@ public class Weight
         float currentWeight = GetWeight(response);
         float light = GetCarryLimitBeforeLightEncumbrance(strength);
         float heavy = GetCarryLimitBeforeHeavyEncumbrance(strength);
-        float max = GetCarryLimitMax(strength);
 
         if(currentWeight < light)
             return Globals.mainActivity.getString(R.string.no_encumbrance);

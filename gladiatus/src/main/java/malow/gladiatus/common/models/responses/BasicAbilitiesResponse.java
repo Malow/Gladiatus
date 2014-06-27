@@ -16,7 +16,7 @@ public class BasicAbilitiesResponse implements ModelInterface
     public final List<Ability> abilities;
 
     @JsonCreator
-    public BasicAbilitiesResponse(@JsonProperty("sessionId") List<Ability> abilities)
+    public BasicAbilitiesResponse(@JsonProperty("abilities") List<Ability> abilities)
     {
         this.abilities = abilities;
     }
