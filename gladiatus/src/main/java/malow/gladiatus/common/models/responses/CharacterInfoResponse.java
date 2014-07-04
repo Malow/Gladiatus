@@ -25,6 +25,7 @@ public class CharacterInfoResponse implements ModelInterface
     public final float willpower;
     public final int money;
     public final List<Ability> abilities;
+    public final String currentlyTraining;
 
     @JsonCreator
     public CharacterInfoResponse(@JsonProperty("characterName") String characterName,
@@ -39,7 +40,8 @@ public class CharacterInfoResponse implements ModelInterface
                                  @JsonProperty("intelligence") float intelligence,
                                  @JsonProperty("willpower") float willpower,
                                  @JsonProperty("money") int money,
-                                 @JsonProperty("abilities") List<Ability> abilities)
+                                 @JsonProperty("abilities") List<Ability> abilities,
+                                 @JsonProperty("currentlyTraining") String currentlyTraining)
     {
         this.characterName = characterName;
         this.characterImage = characterImage;
@@ -54,6 +56,7 @@ public class CharacterInfoResponse implements ModelInterface
         this.willpower = willpower;
         this.money = money;
         this.abilities = abilities;
+        this.currentlyTraining = currentlyTraining;
     }
 
     @Override

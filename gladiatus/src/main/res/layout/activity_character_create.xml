@@ -175,7 +175,8 @@
 
                     <TableRow
                         android:layout_width="fill_parent"
-                        android:layout_height="fill_parent">
+                        android:layout_height="fill_parent"
+                        android:layout_marginTop="5dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -203,9 +204,11 @@
                             android:layout_height="wrap_content"
                             android:text="@string/minus_label"
                             android:id="@+id/character_create_health_minus_button"
-                            android:minHeight="0dp"
-                            android:minWidth="0dp"
-                            android:layout_marginLeft="5dp"/>
+                            android:minHeight="25dp"
+                            android:minWidth="25dp"
+                            android:layout_marginLeft="5dp"
+                            android:background="@color/GladiatusColor10"
+                            android:textColor="#ffffffff"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -223,10 +226,12 @@
                             android:layout_height="wrap_content"
                             android:text="@string/plus_label"
                             android:id="@+id/character_create_health_plus_button"
-                            android:minHeight="0dp"
-                            android:minWidth="0dp"
+                            android:minHeight="25dp"
+                            android:minWidth="25dp"
                             android:layout_marginLeft="-15dp"
-                            android:layout_marginRight="15dp"/>
+                            android:layout_marginRight="15dp"
+                            android:background="@color/GladiatusColor10"
+                            android:textColor="#ffffffff"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -240,7 +245,8 @@
 
                     <TableRow
                         android:layout_width="fill_parent"
-                        android:layout_height="fill_parent">
+                        android:layout_height="fill_parent"
+                        android:layout_marginTop="5dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -266,9 +272,11 @@
                             android:layout_height="wrap_content"
                             android:text="@string/minus_label"
                             android:id="@+id/character_create_strength_minus_button"
-                            android:minHeight="0dp"
-                            android:minWidth="0dp"
-                            android:layout_marginLeft="5dp"/>
+                            android:minHeight="25dp"
+                            android:minWidth="25dp"
+                            android:layout_marginLeft="5dp"
+                            android:background="@color/GladiatusColor10"
+                            android:textColor="#ffffffff"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -285,10 +293,12 @@
                             android:layout_height="wrap_content"
                             android:text="@string/plus_label"
                             android:id="@+id/character_create_strength_plus_button"
-                            android:minHeight="0dp"
-                            android:minWidth="0dp"
+                            android:minHeight="25dp"
+                            android:minWidth="25dp"
                             android:layout_marginLeft="-15dp"
-                            android:layout_marginRight="15dp"/>
+                            android:layout_marginRight="15dp"
+                            android:background="@color/GladiatusColor10"
+                            android:textColor="#ffffffff"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -302,7 +312,8 @@
 
                     <TableRow
                         android:layout_width="fill_parent"
-                        android:layout_height="fill_parent">
+                        android:layout_height="fill_parent"
+                        android:layout_marginTop="5dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -328,9 +339,11 @@
                             android:layout_height="wrap_content"
                             android:text="@string/minus_label"
                             android:id="@+id/character_create_dexterity_minus_button"
-                            android:minHeight="0dp"
-                            android:minWidth="0dp"
-                            android:layout_marginLeft="5dp"/>
+                            android:minHeight="25dp"
+                            android:minWidth="25dp"
+                            android:layout_marginLeft="5dp"
+                            android:background="@color/GladiatusColor10"
+                            android:textColor="#ffffffff"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -347,10 +360,12 @@
                             android:layout_height="wrap_content"
                             android:text="@string/plus_label"
                             android:id="@+id/character_create_dexterity_plus_button"
-                            android:minHeight="0dp"
-                            android:minWidth="0dp"
+                            android:minHeight="25dp"
+                            android:minWidth="25dp"
                             android:layout_marginLeft="-15dp"
-                            android:layout_marginRight="15dp"/>
+                            android:layout_marginRight="15dp"
+                            android:background="@color/GladiatusColor10"
+                            android:textColor="#ffffffff"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -364,7 +379,8 @@
 
                     <TableRow
                         android:layout_width="fill_parent"
-                        android:layout_height="fill_parent">
+                        android:layout_height="fill_parent"
+                        android:layout_marginTop="5dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -390,9 +406,11 @@
                             android:layout_height="wrap_content"
                             android:text="@string/minus_label"
                             android:id="@+id/character_create_intelligence_minus_button"
-                            android:minHeight="0dp"
-                            android:minWidth="0dp"
-                            android:layout_marginLeft="5dp"/>
+                            android:minHeight="25dp"
+                            android:minWidth="25dp"
+                            android:layout_marginLeft="5dp"
+                            android:background="@color/GladiatusColor10"
+                            android:textColor="#ffffffff"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -409,10 +427,12 @@
                             android:layout_height="wrap_content"
                             android:text="@string/plus_label"
                             android:id="@+id/character_create_intelligence_plus_button"
-                            android:minHeight="0dp"
-                            android:minWidth="0dp"
+                            android:minHeight="25dp"
+                            android:minWidth="25dp"
                             android:layout_marginLeft="-15dp"
-                            android:layout_marginRight="15dp"/>
+                            android:layout_marginRight="15dp"
+                            android:background="@color/GladiatusColor10"
+                            android:textColor="#ffffffff"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -426,7 +446,8 @@
 
                     <TableRow
                         android:layout_width="fill_parent"
-                        android:layout_height="fill_parent">
+                        android:layout_height="fill_parent"
+                        android:layout_marginTop="5dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -452,9 +473,11 @@
                             android:layout_height="wrap_content"
                             android:text="@string/minus_label"
                             android:id="@+id/character_create_willpower_minus_button"
-                            android:minHeight="0dp"
-                            android:minWidth="0dp"
-                            android:layout_marginLeft="5dp"/>
+                            android:minHeight="25dp"
+                            android:minWidth="25dp"
+                            android:layout_marginLeft="5dp"
+                            android:background="@color/GladiatusColor10"
+                            android:textColor="#ffffffff"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -470,10 +493,12 @@
                             android:layout_height="wrap_content"
                             android:text="@string/plus_label"
                             android:id="@+id/character_create_willpower_plus_button"
-                            android:minHeight="0dp"
-                            android:minWidth="0dp"
+                            android:minHeight="25dp"
+                            android:minWidth="25dp"
                             android:layout_marginLeft="-15dp"
-                            android:layout_marginRight="15dp"/>
+                            android:layout_marginRight="15dp"
+                            android:background="@color/GladiatusColor10"
+                            android:textColor="#ffffffff"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -487,7 +512,8 @@
 
                     <TableRow
                         android:layout_width="fill_parent"
-                        android:layout_height="fill_parent">
+                        android:layout_height="fill_parent"
+                        android:layout_marginTop="5dp">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -558,8 +584,12 @@
                     android:id="@+id/character_create_randomize_button"
                     android:textSize="14dp"
                     android:layout_gravity="center"
-                    android:minHeight="0dp"
-                    android:layout_marginTop="-5dp"/>
+                    android:minHeight="25dp"
+                    android:layout_marginTop="-5dp"
+                    android:background="@color/GladiatusColor10"
+                    android:textColor="#ffffffff"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"/>
             </LinearLayout>
 
             <View
@@ -609,8 +639,15 @@
                 android:id="@+id/create_character_button"
                 android:layout_gravity="center_horizontal"
                 android:textSize="20sp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"/>
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/GladiatusColor10"
+                android:textColor="#ffffffff"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:minHeight="35dp"/>
 
             <TextView
                 android:layout_width="fill_parent"

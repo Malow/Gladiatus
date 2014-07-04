@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -59,33 +60,55 @@ public class CharacterInfoTasks
                 healthBar.setProgress((int) ((response.currentHealth / response.health) * 100));
 
                 // Stats
-
                 TextView health = (TextView) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_health_text);
                 health.setText(String.valueOf((int) response.health));
                 TextView healthBonus = (TextView) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_health_bonus_text);
                 healthBonus.setText("");
+                if(response.currentlyTraining != null && response.currentlyTraining.equals("health"))
+                {
+                    TextView healthTraining = (TextView) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_health_training);
+                    healthTraining.setText(">>>");
+                }
 
                 TextView strength = (TextView) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_strength_text);
                 strength.setText(String.valueOf((int) response.strength));
                 TextView strengthBonus = (TextView) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_strength_bonus_text);
                 strengthBonus.setText("");
-                TextView strengthTraining = (TextView) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_strength_training);
-                strengthTraining.setText(">>>");
+                if(response.currentlyTraining != null && response.currentlyTraining.equals("strength"))
+                {
+                    TextView strengthTraining = (TextView) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_strength_training);
+                    strengthTraining.setText(">>>");
+                }
 
                 TextView dexterity = (TextView) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_dexterity_text);
                 dexterity.setText(String.valueOf((int) response.dexterity));
                 TextView dexterityBonus = (TextView) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_dexterity_bonus_text);
                 dexterityBonus.setText("");
+                if(response.currentlyTraining != null && response.currentlyTraining.equals("dexterity"))
+                {
+                    TextView dexterityTraining = (TextView) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_dexterity_training);
+                    dexterityTraining.setText(">>>");
+                }
 
                 TextView intelligence = (TextView) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_intelligence_text);
                 intelligence.setText(String.valueOf((int) response.intelligence));
                 TextView intelligenceBonus = (TextView) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_intelligence_bonus_text);
                 intelligenceBonus.setText("");
+                if(response.currentlyTraining != null && response.currentlyTraining.equals("intelligence"))
+                {
+                    TextView intelligenceTraining = (TextView) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_intelligence_training);
+                    intelligenceTraining.setText(">>>");
+                }
 
                 TextView willpower = (TextView) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_willpower_text);
                 willpower.setText(String.valueOf((int) response.willpower));
                 TextView willpowerBonus = (TextView) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_willpower_bonus_text);
                 willpowerBonus.setText("");
+                if(response.currentlyTraining != null && response.currentlyTraining.equals("willpower"))
+                {
+                    TextView willpowerTraining = (TextView) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_willpower_training);
+                    willpowerTraining.setText(">>>");
+                }
 
                 TextView armor = (TextView) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_armor_text);
                 armor.setText(String.valueOf((int) Armor.GetArmor(response)));
@@ -99,10 +122,10 @@ public class CharacterInfoTasks
 
                 // Dice Rolls
                 TextView damageDice = (TextView) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_damage_roll);
-                damageDice.setText(DiceRolls.GetDamageDice(response) + " + " + DiceRolls.GetDamageBonus(response));
+                damageDice.setText("d" + DiceRolls.GetDamageDice(response) + " + " + DiceRolls.GetDamageBonus(response));
 
                 TextView hitDice = (TextView) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_hit_roll);
-                hitDice.setText(DiceRolls.GetHitDice(response) + " + " + DiceRolls.GetHitBonus(response));
+                hitDice.setText("d" + DiceRolls.GetHitDice(response) + " + " + DiceRolls.GetHitBonus(response));
 
                 // Info texts
                 TextView weightText = (TextView) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_weight_text);
@@ -113,6 +136,10 @@ public class CharacterInfoTasks
 
                 TextView goldText = (TextView) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_gold_text);
                 goldText.setText(Money.GetMoneyAsString(response.money));
+
+                // Unhide the layout
+                LinearLayout hiddenInfo = (LinearLayout) Globals.characterInfoFragment.getView().findViewById(R.id.character_info_screen_hidden);
+                hiddenInfo.setVisibility(View.VISIBLE);
             }
         });
     }

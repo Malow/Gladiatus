@@ -43,6 +43,8 @@ public class ConvertStringToModel
         try { return mapper.readValue(networkString, SomethingWentHorriblyWrongResponse.class); } catch (Exception e) {}
         try { return mapper.readValue(networkString, UnexpectedRequestResponse.class); } catch (Exception e) {}
 
-        return null;
+        throw new RuntimeException("Malow, you've forgot to add a new request/response to the converter...");
+
+        //return null;
     }
 }

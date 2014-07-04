@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import malow.gladiatus.GeneralOnClick;
 import malow.gladiatus.Globals;
 import malow.gladiatus.R;
 import malow.gladiatus.common.models.Ability;
@@ -65,25 +66,25 @@ public class CharacterCreateActivity extends Activity
         minusWillpowerButton.setOnClickListener(CharacterCreateOnClick.changeExtraStats(false, "willpower"));
 
         TextView healthLabel = (TextView) findViewById(R.id.character_create_health_label);
-        healthLabel.setOnClickListener(CharacterCreateOnClick.openStatInfoPopup("health"));
+        healthLabel.setOnClickListener(GeneralOnClick.openStatInfoPopup("health", this, findViewById(R.id.scrollView)));
 
         TextView strengthLabel = (TextView) findViewById(R.id.character_create_strength_label);
-        strengthLabel.setOnClickListener(CharacterCreateOnClick.openStatInfoPopup("strength"));
+        strengthLabel.setOnClickListener(GeneralOnClick.openStatInfoPopup("strength", this, findViewById(R.id.scrollView)));
 
         TextView dexterityLabel = (TextView) findViewById(R.id.character_create_dexterity_label);
-        dexterityLabel.setOnClickListener(CharacterCreateOnClick.openStatInfoPopup("dexterity"));
+        dexterityLabel.setOnClickListener(GeneralOnClick.openStatInfoPopup("dexterity", this, findViewById(R.id.scrollView)));
 
         TextView intelligenceLabel = (TextView) findViewById(R.id.character_create_intelligence_label);
-        intelligenceLabel.setOnClickListener(CharacterCreateOnClick.openStatInfoPopup("intelligence"));
+        intelligenceLabel.setOnClickListener(GeneralOnClick.openStatInfoPopup("intelligence", this, findViewById(R.id.scrollView)));
 
         TextView willpowerLabel = (TextView) findViewById(R.id.character_create_willpower_label);
-        willpowerLabel.setOnClickListener(CharacterCreateOnClick.openStatInfoPopup("willpower"));
+        willpowerLabel.setOnClickListener(GeneralOnClick.openStatInfoPopup("willpower", this, findViewById(R.id.scrollView)));
 
         TextView armorLabel = (TextView) findViewById(R.id.character_create_armor_label);
-        armorLabel.setOnClickListener(CharacterCreateOnClick.openStatInfoPopup("armor"));
+        armorLabel.setOnClickListener(GeneralOnClick.openStatInfoPopup("armor", this, findViewById(R.id.scrollView)));
 
         TextView initiativeLabel = (TextView) findViewById(R.id.character_create_initiative_label);
-        initiativeLabel.setOnClickListener(CharacterCreateOnClick.openStatInfoPopup("initiative"));
+        initiativeLabel.setOnClickListener(GeneralOnClick.openStatInfoPopup("initiative", this, findViewById(R.id.scrollView)));
     }
 
     @Override

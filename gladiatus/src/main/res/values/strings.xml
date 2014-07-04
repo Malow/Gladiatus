@@ -70,4 +70,7 @@
     <string name="light_encumbrance">Lightly encumbered</string>
     <string name="heavy_encumbrance">Heavily encumbered</string>
 
+    <string name="currently_training">Currently Training:</string>
+    <string name="time_until_next_skill">Time until next skill:</string>
+
 </resources>

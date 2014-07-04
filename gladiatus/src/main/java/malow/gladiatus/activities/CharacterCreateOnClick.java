@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import malow.gladiatus.GeneralTasks;
 import malow.gladiatus.Globals;
 import malow.gladiatus.R;
 import malow.gladiatus.common.models.Ability;
@@ -97,25 +98,6 @@ public class CharacterCreateOnClick
         public void onClick(View v)
         {
             CharacterCreateTasks.ChangeExtraStats(this.plus, this.stat);
-        }
-    }
-
-    public static OpenStatInfoPopup openStatInfoPopup(String stat)
-    {
-        return self.new OpenStatInfoPopup(stat);
-    }
-    public class OpenStatInfoPopup implements  View.OnClickListener
-    {
-        public String stat;
-
-        public OpenStatInfoPopup(String stat)
-        {
-            this.stat = stat;
-        }
-        @Override
-        public void onClick(View v)
-        {
-            CharacterCreateTasks.OpenStatInfoPopup(this.stat);
         }
     }
 }

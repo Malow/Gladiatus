@@ -113,13 +113,14 @@ public class SQLConnector
 			float willpower = characterResult.getFloat("willpower");
 			int money = characterResult.getInt("money");
 			String abilities = characterResult.getString("abilities");
+			String currentlyTraining = characterResult.getString("currentlyTraining");
 			
 			String[] ids = abilities.split(",");
 			List<Ability> abs = new ArrayList<Ability>();
 			for(String ab : ids)
 				abs.add(Abilities.GetAbilityById(Integer.parseInt(ab)));
 			
-			response = new CharacterInfoResponse(characterName, characterImage, level, xp, status, currentHealth, health, strength, dexterity, intelligence, willpower, money, abs);
+			response = new CharacterInfoResponse(characterName, characterImage, level, xp, status, currentHealth, health, strength, dexterity, intelligence, willpower, money, abs, currentlyTraining);
 		}
 		else
 		{
@@ -198,7 +199,7 @@ public class SQLConnector
 		
 		String abilitiesAsString = createStringFromAbilityList(request.abilities);
 				
-		PreparedStatement newCharacterStatement = connect.prepareStatement("insert into Gladiatus.Characters values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
+		PreparedStatement newCharacterStatement = connect.prepareStatement("insert into Gladiatus.Characters values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
 		newCharacterStatement.setInt(1, accountId);
 		newCharacterStatement.setString(2, request.characterName);
 		newCharacterStatement.setString(3, request.characterImage);
@@ -213,6 +214,7 @@ public class SQLConnector
 		newCharacterStatement.setFloat(12, request.stats.willpower);
 		newCharacterStatement.setInt(13, Constants.STARTING_MONEY);
 		newCharacterStatement.setString(14, abilitiesAsString);
+		newCharacterStatement.setString(15, null);
 		int rowCount = newCharacterStatement.executeUpdate();
 		newCharacterStatement.close();
 		
