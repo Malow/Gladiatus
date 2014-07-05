@@ -11,8 +11,10 @@ import java.util.UUID;
 import malow.gladiatus.common.models.Ability;
 import malow.gladiatus.common.models.ModelInterface;
 import malow.gladiatus.common.models.requests.CharacterCreateRequest;
+import malow.gladiatus.common.models.requests.SetCurrentlyTrainingRequest;
 import malow.gladiatus.common.models.responses.CharacterCreationSuccessfulResponse;
 import malow.gladiatus.common.models.responses.CharacterInfoResponse;
+import malow.gladiatus.common.models.responses.SetCurrentlyTrainingSuccessfulResponse;
 
 public class SQLConnector 
 {	
@@ -227,6 +229,27 @@ public class SQLConnector
 		return new CharacterCreationSuccessfulResponse();
 	}
 	
+	public static ModelInterface setCurrentlyTraining(SetCurrentlyTrainingRequest request) throws Exception 
+	{
+		Class.forName("com.mysql.jdbc.Driver");
+		Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/Gladiatus?" + "user=GladiatusServer&password=qqiuIUr348EW");
+		
+		int accountId = getAccountId(request.sessionId);
+		
+		PreparedStatement newCharacterStatement = connect.prepareStatement("UPDATE characters SET currentlyTraining = ? WHERE account_id = ?;");
+		newCharacterStatement.setString(1, request.stat);
+		newCharacterStatement.setInt(2, accountId);
+		int rowCount = newCharacterStatement.executeUpdate();
+		newCharacterStatement.close();
+		
+		if(rowCount != 1)
+		{
+			throw new Exception();
+		}
+		
+		connect.close();
+		return new SetCurrentlyTrainingSuccessfulResponse();
+	}
 	
 	
 	

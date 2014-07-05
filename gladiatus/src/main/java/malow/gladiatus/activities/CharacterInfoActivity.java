@@ -10,13 +10,11 @@ import android.view.WindowManager;
 
 import malow.gladiatus.Globals;
 import malow.gladiatus.R;
-import malow.gladiatus.common.models.ConvertStringToModel;
-import malow.gladiatus.common.models.responses.CharacterInfoResponse;
+import malow.gladiatus.activities.characterinfo.CharacterInfoTasks;
 
 public class CharacterInfoActivity extends FragmentActivity implements ActionBar.TabListener
 {
     private static final String STATE_SELECTED_NAVIGATION_ITEM = "selected_navigation_item";
-    public static boolean isResumed = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -78,8 +76,6 @@ public class CharacterInfoActivity extends FragmentActivity implements ActionBar
     protected void onResume()
     {
         super.onResume();
-        CharacterInfoTasks.UpdateCharacterInfo();
-        isResumed = true;
     }
 
     @Override

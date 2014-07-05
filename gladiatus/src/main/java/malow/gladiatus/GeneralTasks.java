@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 public class GeneralTasks
 {
-    public static void OpenStatInfoPopup(String stat, final Activity actvivity, final View showAtLocationView)
+    public static void OpenStatInfoPopup(String stat, final Activity activity, final View showAtLocationView)
     {
         String header = "";
         String infoText = "";
@@ -57,15 +57,15 @@ public class GeneralTasks
         final String statName = header;
         final String statDescription = infoText;
 
-        actvivity.runOnUiThread(new Runnable()
+        activity.runOnUiThread(new Runnable()
         {
             @Override
             public void run()
             {
-                LayoutInflater layoutInflater = (LayoutInflater)actvivity.getBaseContext().getSystemService(actvivity.LAYOUT_INFLATER_SERVICE);
+                LayoutInflater layoutInflater = (LayoutInflater) activity.getBaseContext().getSystemService(activity.LAYOUT_INFLATER_SERVICE);
                 View popupView = layoutInflater.inflate(R.layout.popup_frame, null);
                 final PopupWindow popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                popupWindow.setBackgroundDrawable (new BitmapDrawable());
+                popupWindow.setBackgroundDrawable(new BitmapDrawable());
                 popupWindow.setOutsideTouchable(true);
                 popupWindow.setTouchInterceptor(new View.OnTouchListener()
                 {
@@ -84,7 +84,7 @@ public class GeneralTasks
                 popupWindow.setFocusable(true);
                 popupWindow.update();
 
-                LayoutInflater inflater = actvivity.getLayoutInflater();
+                LayoutInflater inflater = activity.getLayoutInflater();
                 LinearLayout layout = (LinearLayout) popupView.findViewById(R.id.popup_frame_layout);
                 layout.removeAllViews();
 

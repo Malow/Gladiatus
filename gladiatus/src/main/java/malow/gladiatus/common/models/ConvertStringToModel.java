@@ -7,6 +7,7 @@ import malow.gladiatus.common.models.requests.CharacterCreateRequest;
 import malow.gladiatus.common.models.requests.CharacterInfoRequest;
 import malow.gladiatus.common.models.requests.LoginRequest;
 import malow.gladiatus.common.models.requests.RegisterRequest;
+import malow.gladiatus.common.models.requests.SetCurrentlyTrainingRequest;
 import malow.gladiatus.common.models.responses.BasicAbilitiesResponse;
 import malow.gladiatus.common.models.responses.CharacterCreationFailedResponse;
 import malow.gladiatus.common.models.responses.CharacterCreationSuccessfulResponse;
@@ -16,6 +17,7 @@ import malow.gladiatus.common.models.responses.LoginSuccessfulResponse;
 import malow.gladiatus.common.models.responses.NoCharacterFoundResponse;
 import malow.gladiatus.common.models.responses.RegisterFailedResponse;
 import malow.gladiatus.common.models.responses.SessionExpiredResponse;
+import malow.gladiatus.common.models.responses.SetCurrentlyTrainingSuccessfulResponse;
 import malow.gladiatus.common.models.responses.SomethingWentHorriblyWrongResponse;
 import malow.gladiatus.common.models.responses.UnexpectedRequestResponse;
 
@@ -30,6 +32,7 @@ public class ConvertStringToModel
         try { return mapper.readValue(networkString, CharacterInfoRequest.class); } catch (Exception e) {}
         try { return mapper.readValue(networkString, LoginRequest.class); } catch (Exception e) {}
         try { return mapper.readValue(networkString, RegisterRequest.class); } catch (Exception e) {}
+        try { return mapper.readValue(networkString, SetCurrentlyTrainingRequest.class); } catch (Exception e) {}
 
         try { return mapper.readValue(networkString, BasicAbilitiesResponse.class); } catch (Exception e) {}
         try { return mapper.readValue(networkString, CharacterCreationFailedResponse.class); } catch (Exception e) {}
@@ -40,10 +43,11 @@ public class ConvertStringToModel
         try { return mapper.readValue(networkString, NoCharacterFoundResponse.class); } catch (Exception e) {}
         try { return mapper.readValue(networkString, RegisterFailedResponse.class); } catch (Exception e) {}
         try { return mapper.readValue(networkString, SessionExpiredResponse.class); } catch (Exception e) {}
+        try { return mapper.readValue(networkString, SetCurrentlyTrainingSuccessfulResponse.class); } catch (Exception e) {}
         try { return mapper.readValue(networkString, SomethingWentHorriblyWrongResponse.class); } catch (Exception e) {}
         try { return mapper.readValue(networkString, UnexpectedRequestResponse.class); } catch (Exception e) {}
 
-        throw new RuntimeException("Malow, you've forgot to add a new request/response to the converter...");
+        throw new RuntimeException("Malow, you've forgot to add a new request/response to the converter... " + networkString);
 
         //return null;
     }

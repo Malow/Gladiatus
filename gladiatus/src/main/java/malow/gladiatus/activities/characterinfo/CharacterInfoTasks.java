@@ -1,4 +1,4 @@
-package malow.gladiatus.activities;
+package malow.gladiatus.activities.characterinfo;
 
 import android.app.Fragment;
 import android.content.Context;
@@ -15,6 +15,8 @@ import android.widget.TextView;
 import malow.gladiatus.Globals;
 import malow.gladiatus.NetworkClient;
 import malow.gladiatus.R;
+import malow.gladiatus.activities.CharacterInfoActivity;
+import malow.gladiatus.activities.training.TrainingFragment;
 import malow.gladiatus.common.Armor;
 import malow.gladiatus.common.DiceRolls;
 import malow.gladiatus.common.Initiative;
@@ -178,23 +180,22 @@ public class CharacterInfoTasks
 
     public static void SwitchToTab(int tab)
     {
-        HideFragmentKeyboard();
+        Fragment fragment = null;
 
-        Fragment fragment = new CharacterInfoActivityFragment();
-        Bundle args = new Bundle();
-        args.putInt(CharacterInfoActivityFragment.TAB_NUMBER, tab);
-        fragment.setArguments(args);
+        if(tab == 0)
+            fragment = new CharacterInfoFragment();
+        else if(tab == 1)
+            fragment = new TrainingFragment();
+
         Globals.characterInfoActivity.getFragmentManager().beginTransaction().replace(R.id.character_info_main_view, fragment).commit();
-
-        if(tab == 0 && CharacterInfoActivity.isResumed)
-            CharacterInfoTasks.UpdateCharacterInfo();
+        //HideFragmentKeyboard(fragment);
     }
 
-    public static void HideFragmentKeyboard()
+    public static void HideFragmentKeyboard(Fragment fragment)
     {
         View target = null;
-        if(Globals.characterInfoFragment != null)
-            target = Globals.characterInfoFragment.getView().findFocus();
+        if(fragment != null)
+            target = fragment.getView().findFocus();
         if (target != null) {
             InputMethodManager imm = (InputMethodManager) target.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(target.getWindowToken(), 0);

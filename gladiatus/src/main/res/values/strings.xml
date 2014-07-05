@@ -66,11 +66,14 @@
     <string name="character_info_tab_3">Inventory</string>
     <string name="character_info_tab_4">Abilities</string>
 
-    <string name="no_encumbrance">Not encumbered</string>
-    <string name="light_encumbrance">Lightly encumbered</string>
-    <string name="heavy_encumbrance">Heavily encumbered</string>
-
     <string name="currently_training">Currently Training:</string>
     <string name="time_until_next_skill">Time until next skill:</string>
+    <string name="current_skill">Current Skill:</string>
+
+    <string name="health_text">Health</string>
+    <string name="strength_text">Strength</string>
+    <string name="dexterity_text">Dexterity</string>
+    <string name="intelligence_text">Intelligence</string>
+    <string name="willpower_text">Willpower</string>
 
 </resources>

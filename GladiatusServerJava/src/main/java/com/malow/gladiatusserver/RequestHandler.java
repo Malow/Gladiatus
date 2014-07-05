@@ -15,6 +15,7 @@ import malow.gladiatus.common.models.requests.CharacterCreateRequest;
 import malow.gladiatus.common.models.requests.CharacterInfoRequest;
 import malow.gladiatus.common.models.requests.LoginRequest;
 import malow.gladiatus.common.models.requests.RegisterRequest;
+import malow.gladiatus.common.models.requests.SetCurrentlyTrainingRequest;
 import malow.gladiatus.common.models.responses.BasicAbilitiesResponse;
 import malow.gladiatus.common.models.responses.CharacterCreationFailedResponse;
 import malow.gladiatus.common.models.responses.LoginFailedResponse;
@@ -49,7 +50,7 @@ public class RequestHandler
 				e.printStackTrace();
 			}
 		}
-		sender.SendData(response.toNetworkString());
+		respondToClient(sender, response.toNetworkString());
 	}
 	
 	public static void handleRegisterRequest(RegisterRequest request, NetworkChannel sender) 
@@ -74,7 +75,7 @@ public class RequestHandler
 				e.printStackTrace();
 			}
 		}
-		sender.SendData(response.toNetworkString());
+		respondToClient(sender, response.toNetworkString());
 	}
 	
 	
@@ -105,7 +106,7 @@ public class RequestHandler
 				e.printStackTrace();
 			}
 		}
-		sender.SendData(response.toNetworkString());
+		respondToClient(sender, response.toNetworkString());
 	}
 
 	public static void handleBasicAbilitiesRequest(BasicAbilitiesRequest request, NetworkChannel sender) 
@@ -123,7 +124,7 @@ public class RequestHandler
 			e.printStackTrace();
 			response = new BasicAbilitiesResponse(new ArrayList<Ability>());
 		}
-		sender.SendData(response.toNetworkString());
+		respondToClient(sender, response.toNetworkString());
 	}
 
 	public static void handleCharacterCreateRequest(CharacterCreateRequest request, NetworkChannel sender) 
@@ -132,7 +133,7 @@ public class RequestHandler
 		if(!CharacterCreationValidator.ValidateRequest(request))
 		{
 			response = new CharacterCreationFailedResponse("Validation of request failed.");
-			sender.SendData(response.toNetworkString());
+			respondToClient(sender, response.toNetworkString());
 			return;
 		}
 		
@@ -160,7 +161,29 @@ public class RequestHandler
 				response = new CharacterCreationFailedResponse("Unexpected error.");
 			}
 		}
-		sender.SendData(response.toNetworkString());
-		
+		respondToClient(sender, response.toNetworkString());
+	}
+
+	public static void handleSetCurrentlyTrainingRequest(SetCurrentlyTrainingRequest request, NetworkChannel sender) 
+	{
+		ModelInterface response = null;
+		try
+		{
+			response = SQLConnector.setCurrentlyTraining(request);
+		}
+		catch (Exception e)
+		{
+			System.out.println("Client " + (sender.GetChannelID() + 1) + " SetCurrentlyTraining failed: " + e);
+			e.printStackTrace();
+			response = new SomethingWentHorriblyWrongResponse();
+		}
+		respondToClient(sender, response.toNetworkString());
+	}
+	
+	
+	private static void respondToClient(NetworkChannel sender, String msg)
+	{
+		System.out.println("Sent to Client " + (sender.GetChannelID() + 1) + ": " + msg);
+		sender.SendData(msg);
 	}
 }

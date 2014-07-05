@@ -8,6 +8,7 @@ import malow.gladiatus.common.models.requests.CharacterCreateRequest;
 import malow.gladiatus.common.models.requests.CharacterInfoRequest;
 import malow.gladiatus.common.models.requests.LoginRequest;
 import malow.gladiatus.common.models.requests.RegisterRequest;
+import malow.gladiatus.common.models.requests.SetCurrentlyTrainingRequest;
 import malow.gladiatus.common.models.responses.UnexpectedRequestResponse;
 import malow.gladiatus.common.models.*;
 
@@ -86,9 +87,14 @@ public class Server extends Process
 				{
 					RequestHandler.handleCharacterCreateRequest((CharacterCreateRequest) request, sender);
 				}
+				else if(request instanceof SetCurrentlyTrainingRequest)
+				{
+					RequestHandler.handleSetCurrentlyTrainingRequest((SetCurrentlyTrainingRequest) request, sender);
+				}
 				else
 				{
 					System.out.println("Unexpected Request from client " + (sender.GetChannelID() + 1) + ": " + request);
+					System.out.println("Sent to Client " + (sender.GetChannelID() + 1) + ": " + new UnexpectedRequestResponse().toNetworkString());
 					sender.SendData(new UnexpectedRequestResponse().toNetworkString());
 				}
 			}

@@ -1,7 +1,5 @@
 package malow.gladiatus.common;
 
-import malow.gladiatus.Globals;
-import malow.gladiatus.R;
 import malow.gladiatus.common.models.responses.CharacterInfoResponse;
 
 public class Weight
@@ -47,11 +45,11 @@ public class Weight
         float heavy = GetCarryLimitBeforeHeavyEncumbrance(strength);
 
         if(currentWeight < light)
-            return Globals.mainActivity.getString(R.string.no_encumbrance);
+            return "Not encumbered";
         else if(currentWeight < heavy)
-            return Globals.mainActivity.getString(R.string.light_encumbrance);
+            return "Lightly encumbered";
         else
-            return Globals.mainActivity.getString(R.string.heavy_encumbrance);
+            return "Heavily encumbered";
     }
 
     public static float GetWeight(CharacterInfoResponse response)

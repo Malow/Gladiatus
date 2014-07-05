@@ -12,7 +12,7 @@
         android:layout_height="fill_parent"
         android:layout_margin="10dp"
         android:id="@+id/character_info_screen_hidden"
-        android:visibility="invisible">
+        >
 
         <LinearLayout
             android:orientation="horizontal"

@@ -20,6 +20,10 @@ public class GladiatusServer
 		cl.Start();
 		
 		LoadFromDatabase();
+		
+		TrainingUpdateProcess trainingUpdateProcess = new TrainingUpdateProcess();
+		trainingUpdateProcess.updateEveryXSeconds = 10.0f;
+		trainingUpdateProcess.Start();
 
 		String input = "";
 		Scanner in = new Scanner(System.in);
@@ -34,6 +38,10 @@ public class GladiatusServer
 			if(input.equals("reload:db"))
 				LoadFromDatabase();
 		}
+		
+		trainingUpdateProcess.Close();
+		trainingUpdateProcess.WaitUntillDone();
+		trainingUpdateProcess = null;		
 		
 		in.close();
 		cl.Close();
