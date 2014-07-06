@@ -16,6 +16,9 @@ public class TrainingFragment extends Fragment
     {
         View v = inflater.inflate(R.layout.training_screen, container, false);
 
+        LinearLayout maintain = (LinearLayout) v.findViewById(R.id.character_training_maintain_border);
+        maintain.setOnClickListener(TrainingOnClick.setCurrentlyTraining(null, this.getActivity(), v.findViewById(R.id.training_layout)));
+
         LinearLayout health = (LinearLayout) v.findViewById(R.id.character_training_health_border);
         health.setOnClickListener(TrainingOnClick.setCurrentlyTraining("health", this.getActivity(), v.findViewById(R.id.training_layout)));
 

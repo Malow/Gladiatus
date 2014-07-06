@@ -6,6 +6,8 @@ public class Training
     public static final float TIME_REQUIRED_SIMPLE = 100.0f;
     public static final float EXPONENTIAL_INCREASER = 1.2f;
 
+    public static final float STAT_DECAY_PERCENT_PER_DAY = 5.0f;
+
     // Required time in seconds for training up a stat at current skill:
     /* public static List<Integer> skillRequirements = Arrays.asList(
             100,    //1

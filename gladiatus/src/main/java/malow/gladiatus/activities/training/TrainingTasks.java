@@ -147,6 +147,7 @@ public class TrainingTasks
             @Override
             public void run()
             {
+                LinearLayout maintain = (LinearLayout) trainingView.findViewById(R.id.character_training_maintain_border);
                 LinearLayout health = (LinearLayout) trainingView.findViewById(R.id.character_training_health_border);
                 ProgressBar healthBar = (ProgressBar) trainingView.findViewById(R.id.character_training_health_bar);
                 LinearLayout strength = (LinearLayout) trainingView.findViewById(R.id.character_training_strength_border);
@@ -158,6 +159,7 @@ public class TrainingTasks
                 LinearLayout willpower = (LinearLayout) trainingView.findViewById(R.id.character_training_willpower_border);
                 ProgressBar willpowerBar = (ProgressBar) trainingView.findViewById(R.id.character_training_willpower_bar);
 
+                maintain.setBackgroundColor(activity.getResources().getColor(R.color.GladiatusColor10));
                 health.setBackgroundColor(activity.getResources().getColor(R.color.GladiatusColor10));
                 healthBar.setProgressDrawable(trainingView.getResources().getDrawable(R.drawable.progress_bar_drawable_blue));
                 strength.setBackgroundColor(activity.getResources().getColor(R.color.GladiatusColor10));
@@ -169,27 +171,31 @@ public class TrainingTasks
                 willpower.setBackgroundColor(activity.getResources().getColor(R.color.GladiatusColor10));
                 willpowerBar.setProgressDrawable(trainingView.getResources().getDrawable(R.drawable.progress_bar_drawable_blue));
 
-                if(stat != null && stat.equals("health"))
+                if(stat == null)
+                {
+                    maintain.setBackgroundColor(activity.getResources().getColor(R.color.GladiatusHealthGreenColor));
+                }
+                else if(stat.equals("health"))
                 {
                     health.setBackgroundColor(activity.getResources().getColor(R.color.GladiatusHealthGreenColor));
                     healthBar.setProgressDrawable(trainingView.getResources().getDrawable(R.drawable.progress_bar_drawable_health));
                 }
-                if(stat != null && stat.equals("strength"))
+                else if(stat.equals("strength"))
                 {
                     strength.setBackgroundColor(activity.getResources().getColor(R.color.GladiatusHealthGreenColor));
                     strengthBar.setProgressDrawable(trainingView.getResources().getDrawable(R.drawable.progress_bar_drawable_health));
                 }
-                if(stat != null && stat.equals("dexterity"))
+                else if(stat.equals("dexterity"))
                 {
                     dexterity.setBackgroundColor(activity.getResources().getColor(R.color.GladiatusHealthGreenColor));
                     dexterityBar.setProgressDrawable(trainingView.getResources().getDrawable(R.drawable.progress_bar_drawable_health));
                 }
-                if(stat != null && stat.equals("intelligence"))
+                else if(stat.equals("intelligence"))
                 {
                     intelligence.setBackgroundColor(activity.getResources().getColor(R.color.GladiatusHealthGreenColor));
                     intelligenceBar.setProgressDrawable(trainingView.getResources().getDrawable(R.drawable.progress_bar_drawable_health));
                 }
-                if(stat != null && stat.equals("willpower"))
+                else if(stat.equals("willpower"))
                 {
                     willpower.setBackgroundColor(activity.getResources().getColor(R.color.GladiatusHealthGreenColor));
                     willpowerBar.setProgressDrawable(trainingView.getResources().getDrawable(R.drawable.progress_bar_drawable_health));

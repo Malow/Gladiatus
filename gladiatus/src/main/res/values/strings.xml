@@ -76,4 +76,8 @@
     <string name="intelligence_text">Intelligence</string>
     <string name="willpower_text">Willpower</string>
 
+    <string name="maintain_text">Maintain current stats</string>
+    <string name="maintain_explanation_text">Maintains your current stats and prevents any stat from decaying.</string>
+
+
 </resources>

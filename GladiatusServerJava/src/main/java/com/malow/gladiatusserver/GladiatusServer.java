@@ -22,7 +22,8 @@ public class GladiatusServer
 		LoadFromDatabase();
 		
 		TrainingUpdateProcess trainingUpdateProcess = new TrainingUpdateProcess();
-		trainingUpdateProcess.updateEveryXSeconds = 10.0f;
+		trainingUpdateProcess.diffMultiplier = 1.0f;
+		trainingUpdateProcess.updateEveryXSeconds = 1.0f;
 		trainingUpdateProcess.Start();
 
 		String input = "";
