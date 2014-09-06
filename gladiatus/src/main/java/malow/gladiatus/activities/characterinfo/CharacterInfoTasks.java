@@ -16,6 +16,7 @@ import malow.gladiatus.Globals;
 import malow.gladiatus.NetworkClient;
 import malow.gladiatus.R;
 import malow.gladiatus.activities.CharacterInfoActivity;
+import malow.gladiatus.activities.inventory.InventoryFragment;
 import malow.gladiatus.activities.training.TrainingFragment;
 import malow.gladiatus.common.Armor;
 import malow.gladiatus.common.DiceRolls;
@@ -186,6 +187,8 @@ public class CharacterInfoTasks
             fragment = new CharacterInfoFragment();
         else if(tab == 1)
             fragment = new TrainingFragment();
+        else if(tab == 2)
+            fragment = new InventoryFragment();
 
         Globals.characterInfoActivity.getFragmentManager().beginTransaction().replace(R.id.character_info_main_view, fragment).commit();
         //HideFragmentKeyboard(fragment);

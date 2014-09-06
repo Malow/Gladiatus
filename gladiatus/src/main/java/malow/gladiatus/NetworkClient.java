@@ -1,8 +1,5 @@
 package malow.gladiatus;
 
-
-import android.util.Log;
-
 import malow.gladiatus.common.models.ConvertStringToModel;
 import malow.gladiatus.common.models.ModelInterface;
 import malow.malowlib.RequestResponseClient;
@@ -10,7 +7,7 @@ import malow.malowlib.RequestResponseClient;
 public class NetworkClient
 {
     private static RequestResponseClient nc = null;
-    private static final String SERVER_IP = "83.233.58.215";
+    private static final String SERVER_IP = "malow.mooo.com";
     private static final int SERVER_PORT = 7000;
 
     private static void createNetworkClientIfNeeded()

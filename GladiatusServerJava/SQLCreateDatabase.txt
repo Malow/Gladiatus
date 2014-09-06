@@ -1,3 +1,4 @@
+
 DROP DATABASE Gladiatus;
 CREATE DATABASE Gladiatus;
 USE Gladiatus;
@@ -6,6 +7,10 @@ CREATE USER GladiatusServer IDENTIFIED BY 'qqiuIUr348EW';
 
 GRANT USAGE ON *.* TO GladiatusServer@localhost IDENTIFIED BY 'qqiuIUr348EW'; 
 GRANT ALL PRIVILEGES ON Gladiatus.* TO GladiatusServer@localhost; 
+
+DROP TABLE characters;
+DROP TABLE accounts;
+DROP TABLE abilities;
 
 CREATE TABLE Accounts (id INT NOT NULL AUTO_INCREMENT, 
     username VARCHAR(40) NOT NULL UNIQUE,
@@ -21,12 +26,12 @@ CREATE TABLE Characters (id INT NOT NULL AUTO_INCREMENT,
     LEVEL INT NOT NULL,
     xp INT NOT NULL,
     STATUS VARCHAR(100),
-    currentHealth FLOAT NOT NULL,
-    health FLOAT NOT NULL,
-    strength FLOAT NOT NULL,
-    dexterity FLOAT NOT NULL, 
-    intelligence FLOAT NOT NULL, 
-    willpower FLOAT NOT NULL, 
+    currentHealth DECIMAL(50, 20) UNSIGNED NOT NULL,
+    health DECIMAL(50, 20) UNSIGNED NOT NULL,
+    strength DECIMAL(50, 20) UNSIGNED NOT NULL,
+    dexterity DECIMAL(50, 20) UNSIGNED NOT NULL,
+    intelligence DECIMAL(50, 20) UNSIGNED NOT NULL,
+    willpower DECIMAL(50, 20) UNSIGNED NOT NULL,
     money INT NOT NULL,
     abilities VARCHAR(100) NOT NULL,
     currentlyTraining VARCHAR(40),
@@ -42,9 +47,17 @@ CREATE TABLE Abilities (id INT NOT NULL AUTO_INCREMENT,
 
 INSERT INTO Abilities VALUES(DEFAULT, "Attack", "Basic attack.", "[Active] [Range:Weapon]", 1);
 INSERT INTO Abilities VALUES(DEFAULT, "Shield Proficiency", "Basic shield proficiency, removing penelties for using it.", "[Passive]", 1);
-INSERT INTO Abilities VALUES(DEFAULT, "Onehanded Sword Proficiency", "Basic onehanded Sword proficiency, removing penelties for using it.", "[Passive]", 1);
-INSERT INTO Abilities VALUES(DEFAULT, "Crushing Blow", "Performs an offensive attack, giving +2 to hit but -2 to your armor for one round.", "[Active] [Range:Weapon]", 1);
+INSERT INTO Abilities VALUES(DEFAULT, "Onehanded Sword Proficiency", "Basic onehanded Sword proficiency, removing penelties for using it.", "[Passive]", 
+
+1);
+INSERT INTO Abilities VALUES(DEFAULT, "Crushing Blow", "Performs an offensive attack, giving +2 to hit but -2 to your armor for one round.", "[Active] 
+
+[Range:Weapon]", 1);
 INSERT INTO Abilities VALUES(DEFAULT, "Defensive Posture", "Puts you in a defensive posture, giving you +3 to your armor for one round.", "[Active]", 1);
+
+INSERT INTO Accounts VALUES(DEFAULT, "a", "cc175b9c0f1b6a831c399e269772661", "a", NULL);
+INSERT INTO Characters VALUES(DEFAULT, 1, "a", 2, 1, 0, "No wounds - Not exhausted", 16, 16, 9, 6, 11, 8, 175, "1,4,3,", NULL);
+
 
 
 

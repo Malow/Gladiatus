@@ -14,6 +14,7 @@ public class TrainingUpdateProcess extends Process
 	public float updateEveryXSeconds = 1.0f;
 	public boolean logUpdates = false;
 	public float diffMultiplier = 1.0f;
+	public int updatedCharacters = 0;
 	
 	public TrainingUpdateProcess()
 	{
@@ -39,7 +40,7 @@ public class TrainingUpdateProcess extends Process
 			
 			float timeElapsed = GetTimeSinceLastDiff();
 			if(this.logUpdates)
-				System.out.println("Finished updating training in " + timeElapsed + "ms.");
+				System.out.println("Finished updating training in " + timeElapsed + "ms. " + this.updatedCharacters + " Characters updated.");
 			
 			try 
 			{
@@ -63,6 +64,7 @@ public class TrainingUpdateProcess extends Process
 	
 	private void UpdateTraining(float diff) throws Exception
 	{
+		this.updatedCharacters = 0;
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/Gladiatus?" + "user=GladiatusServer&password=qqiuIUr348EW");
 				
@@ -84,13 +86,13 @@ public class TrainingUpdateProcess extends Process
 			float intelligence = characterResult.getFloat("intelligence");
 			float willpower = characterResult.getFloat("willpower");
 			String currentlyTraining = characterResult.getString("currentlyTraining");
-			
+						
 			if(health > 10.0f)
 			{
 				health -= decay;
 				if(health < 10.0f)
 					health = 10.0f;
-			}
+			}			
 			if(strength > 10.0f)
 			{
 				strength -= decay;
@@ -147,6 +149,8 @@ public class TrainingUpdateProcess extends Process
 			{
 				throw new Exception();
 			}
+			
+			this.updatedCharacters++;
 		}
 		
 		characterStatement.close();

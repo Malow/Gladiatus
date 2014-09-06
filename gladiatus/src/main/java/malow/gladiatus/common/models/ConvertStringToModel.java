@@ -12,6 +12,7 @@ import malow.gladiatus.common.models.responses.BasicAbilitiesResponse;
 import malow.gladiatus.common.models.responses.CharacterCreationFailedResponse;
 import malow.gladiatus.common.models.responses.CharacterCreationSuccessfulResponse;
 import malow.gladiatus.common.models.responses.CharacterInfoResponse;
+import malow.gladiatus.common.models.responses.CharacterInventoryResponse;
 import malow.gladiatus.common.models.responses.LoginFailedResponse;
 import malow.gladiatus.common.models.responses.LoginSuccessfulResponse;
 import malow.gladiatus.common.models.responses.NoCharacterFoundResponse;
@@ -38,6 +39,7 @@ public class ConvertStringToModel
         try { return mapper.readValue(networkString, CharacterCreationFailedResponse.class); } catch (Exception e) {}
         try { return mapper.readValue(networkString, CharacterCreationSuccessfulResponse.class); } catch (Exception e) {}
         try { return mapper.readValue(networkString, CharacterInfoResponse.class); } catch (Exception e) {}
+        try { return mapper.readValue(networkString, CharacterInventoryResponse.class); } catch (Exception e) {}
         try { return mapper.readValue(networkString, LoginFailedResponse.class); } catch (Exception e) {}
         try { return mapper.readValue(networkString, LoginSuccessfulResponse.class); } catch (Exception e) {}
         try { return mapper.readValue(networkString, NoCharacterFoundResponse.class); } catch (Exception e) {}
